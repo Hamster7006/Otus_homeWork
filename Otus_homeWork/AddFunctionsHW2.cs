@@ -8,21 +8,21 @@ namespace Otus_homeWork
     {
         internal static void AddTaskList(string? inputData = null)
         {
-            if (inputData != null)
+            if (!string.IsNullOrEmpty(inputData))
             {
                 Program.TaskList.Add(inputData);
             }
             else
             {
-                HelpFunctions.NullOrWhiteSpaseName("Напишите задачу для добавления в сисок");
+                HelpFunctions.NullOrWhiteSpaseName("Напишите задачу для добавления в список");
                 inputData = Console.ReadLine();
-                if (inputData != null)
+                if (!string.IsNullOrEmpty(inputData))
                     Program.TaskList.Add(inputData);
                 else
                     HelpFunctions.NullOrWhiteSpaseName("Не корректный ввод задачи");
             }
             if (Program.TaskList.Contains(inputData))
-                HelpFunctions.NullOrWhiteSpaseName("Задача успешно добавлена");
+                HelpFunctions.NullOrWhiteSpaseName($"Задача '{inputData}' успешно добавлена");
             else
                 HelpFunctions.NullOrWhiteSpaseName("Ошибка добавления");
 
@@ -38,8 +38,7 @@ namespace Otus_homeWork
         {
             if (parm == null)
             {
-                Console.Clear();
-                PrintTaskList();
+                PrintTaskList(true, false);
                 HelpFunctions.NullOrWhiteSpaseName("Введите номер задачи для удаления! Для удаления всего списка введите 'all'");
                 var index = Console.ReadLine();
                 if (index == "all")
@@ -54,22 +53,31 @@ namespace Otus_homeWork
             }
             else if ( parm.Contains(',') )
             {
-                var indArr = parm.Split(',');
-                var chengeInd = 0;
+                var changeInd = 0;
+
+                List<string> indArr = new List<string>();
+
+                foreach (string str in parm.Split(','))
+                {
+                    if (!indArr.Contains(str))
+                        indArr.Add(str);
+                }
+                indArr.Sort();
+
                 foreach (var ind in indArr)
                 {
-                    if (int.TryParse(ind, out var res) && res >= 1 && res <= Program.TaskList.Count)
+                    if (int.TryParse(ind, out var res) && res >= 1 && res - changeInd <= Program.TaskList.Count)
                     {
-                        RemoveTaskList($"{res-chengeInd}",false);
-                        chengeInd++;
+                        RemoveTaskList($"{res-changeInd}",false);
+                        changeInd++;
                     }
                 }
             }
             else if (int.TryParse(parm, out var res) && res >= 1 && res <= Program.TaskList.Count)
             {
-                Program.TaskList.RemoveAt(res);
-                PrintTaskList();
-                Console.WriteLine("Задача удалена");
+                var tempTask = Program.TaskList[res-1];
+                Program.TaskList.RemoveAt(res-1);
+                Console.WriteLine($"Задача '{tempTask}' удалена");
             }
             else
             {
@@ -79,18 +87,34 @@ namespace Otus_homeWork
                 HelpFunctions.Pause();
         }
 
+        private static List<string> IndArrSorted(string[] arrToSort)
+        {
+            List<string> arrSorted = new List<string>();
+
+            foreach (var index in arrToSort)
+            {
+                arrSorted.Add(index);
+            }
+            arrSorted.Sort();
+
+            return arrSorted;
+        }
         /// <summary>
-        /// просто красиво рисует таблицу
+        /// красивый вывод таблицы
         /// </summary>
-        internal static void PrintTaskList()
+        /// <param name="clear"></param> очистка консоли
+        /// <param name="pause"></param> вызов паузы, используется, тк функция является частью другой функии 
+        internal static void PrintTaskList(bool clear = true,bool pause = true)
         {
             var index = 1;
             var leng = 8;
-
+            if(clear)
+                Console.Clear();
             if (Program.TaskList.Count == 0)
                 Console.WriteLine("Список пуст");
             else
-            { 
+            {
+                HelpFunctions.NullOrWhiteSpaseName("Вот список задач");
                 foreach (var task in Program.TaskList)
                 {
                     if (leng < task.Length)
@@ -121,6 +145,8 @@ namespace Otus_homeWork
                     }
                 }
             }
+            if (pause)
+                HelpFunctions.Pause();
         }
 
         /// <summary>

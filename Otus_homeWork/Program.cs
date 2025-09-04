@@ -65,7 +65,8 @@ namespace Otus_homeWork
                     case string s when s.StartsWith("/removetask ") && !s.Equals("/removetask "):
                         AddFunctionsHW2.RemoveTaskList(s.Replace("/removetask ", ""));
                         break;
-                    case string s when s.StartsWith("/addtask ") && !s.Equals("/addtask "):
+                    //case string s when s.StartsWith("/addtask ") && !s.Equals("/addtask "):
+                    case string s when s.StartsWith("/addtask ") :
                         AddFunctionsHW2.AddTaskList(s.Replace("/addtask ", ""));
                         break;
                     case "/addtask":

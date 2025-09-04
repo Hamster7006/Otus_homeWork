@@ -7,9 +7,7 @@ namespace Otus_homeWork
     {
         internal static void Pause()
         {
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Для продолжения нажмите любую клавишу");
+            Console.WriteLine("\n\r \n\rДля продолжения нажмите любую клавишу");
             Console.ReadKey();
             Console.Clear();
         }

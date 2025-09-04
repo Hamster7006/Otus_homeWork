@@ -31,8 +31,8 @@
         }
         internal static void Info()
         {
-            Console.WriteLine("Версия программы: " + Program.VersionBot);
-            Console.WriteLine("Дата релиза программы: " + Program.DateRelise);
+            Console.WriteLine($"Версия программы: {Program.VersionBot}");
+            Console.WriteLine($"Дата релиза программы: {Program.DateRelise}");
             HelpFunctions.Pause();
         }
     }
