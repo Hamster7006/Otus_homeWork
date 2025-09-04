@@ -11,21 +11,26 @@ namespace Otus_homeWork
             if (!string.IsNullOrEmpty(inputData))
             {
                 Program.TaskList.Add(inputData);
+                if (Program.TaskList.Contains(inputData))
+                    HelpFunctions.NullOrWhiteSpaseName($"Задача '{inputData}' успешно добавлена");
+                else
+                    HelpFunctions.NullOrWhiteSpaseName("Ошибка добавления");
             }
             else
             {
                 HelpFunctions.NullOrWhiteSpaseName("Напишите задачу для добавления в список");
                 inputData = Console.ReadLine();
                 if (!string.IsNullOrEmpty(inputData))
+                {
                     Program.TaskList.Add(inputData);
+                    if (Program.TaskList.Contains(inputData))
+                        HelpFunctions.NullOrWhiteSpaseName($"Задача '{inputData}' успешно добавлена");
+                    else
+                        HelpFunctions.NullOrWhiteSpaseName("Ошибка добавления");
+                }
                 else
                     HelpFunctions.NullOrWhiteSpaseName("Не корректный ввод задачи");
             }
-            if (Program.TaskList.Contains(inputData))
-                HelpFunctions.NullOrWhiteSpaseName($"Задача '{inputData}' успешно добавлена");
-            else
-                HelpFunctions.NullOrWhiteSpaseName("Ошибка добавления");
-
             HelpFunctions.Pause();
         }
 
@@ -38,7 +43,7 @@ namespace Otus_homeWork
         {
             if (parm == null)
             {
-                PrintTaskList(true, false);
+                PrintTaskList(false);
                 HelpFunctions.NullOrWhiteSpaseName("Введите номер задачи для удаления! Для удаления всего списка введите 'all'");
                 var index = Console.ReadLine();
                 if (index == "all")
@@ -87,29 +92,17 @@ namespace Otus_homeWork
                 HelpFunctions.Pause();
         }
 
-        private static List<string> IndArrSorted(string[] arrToSort)
-        {
-            List<string> arrSorted = new List<string>();
-
-            foreach (var index in arrToSort)
-            {
-                arrSorted.Add(index);
-            }
-            arrSorted.Sort();
-
-            return arrSorted;
-        }
         /// <summary>
         /// красивый вывод таблицы
         /// </summary>
         /// <param name="clear"></param> очистка консоли
         /// <param name="pause"></param> вызов паузы, используется, тк функция является частью другой функии 
-        internal static void PrintTaskList(bool clear = true,bool pause = true)
+        internal static void PrintTaskList(bool pause = true)
         {
             var index = 1;
             var leng = 8;
-            if(clear)
-                Console.Clear();
+            Console.Clear();
+
             if (Program.TaskList.Count == 0)
                 Console.WriteLine("Список пуст");
             else

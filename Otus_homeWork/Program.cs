@@ -59,18 +59,11 @@ namespace Otus_homeWork
                     case string s when !string.IsNullOrEmpty(Name) && s.StartsWith("/echo ") && !(s.Equals("/echo") || s.Equals("/echo ")):
                         BaseMenuFunctionHW1.Echo(s.Replace("/echo ", ""));
                         break;
-                    case "/removetask" :
-                        AddFunctionsHW2.RemoveTaskList();
-                        break;
-                    case string s when s.StartsWith("/removetask ") && !s.Equals("/removetask "):
+                    case string s when s.StartsWith("/removetask "):
                         AddFunctionsHW2.RemoveTaskList(s.Replace("/removetask ", ""));
                         break;
-                    //case string s when s.StartsWith("/addtask ") && !s.Equals("/addtask "):
                     case string s when s.StartsWith("/addtask ") :
                         AddFunctionsHW2.AddTaskList(s.Replace("/addtask ", ""));
-                        break;
-                    case "/addtask":
-                        AddFunctionsHW2.AddTaskList();
                         break;
                     case "/showtasks":
                         AddFunctionsHW2.PrintTaskList();
