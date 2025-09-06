@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Otus_homeWork
+﻿namespace Otus_homeWork
 {
     internal class BaseMenuFunctionHW1
     {

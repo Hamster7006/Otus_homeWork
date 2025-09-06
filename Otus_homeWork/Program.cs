@@ -1,6 +1,4 @@
-﻿using System.Reflection.Emit;
-
-namespace Otus_homeWork
+﻿namespace Otus_homeWork
 {
     public class Program
     {
