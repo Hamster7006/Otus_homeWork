@@ -4,11 +4,7 @@ namespace Otus_homeWork
 {
     internal class Program
     {
-        internal static string? Name;
-        internal static string VersionBot = "1.2.0";
-        internal static string DateRelise = "16.08.2025";
-        internal static string[,] AvalibleComands = new string[8, 2];
-        internal static List<string> TaskList = new List<string>();
+     
 
         static void Main()
         {
