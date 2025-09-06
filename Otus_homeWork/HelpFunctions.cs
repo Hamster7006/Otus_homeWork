@@ -1,5 +1,6 @@
 ﻿using Otus_homeWork;
 using System.ComponentModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Otus_homeWork
 {
@@ -14,22 +15,22 @@ namespace Otus_homeWork
 
         internal static void NullOrWhiteSpaseName(string? print = null)
         {
-            if (string.IsNullOrEmpty(Program.Name))
+            if (string.IsNullOrEmpty(VariableData.Name))
                 Console.WriteLine(print);
             else
-                Console.WriteLine(Program.Name + ", " + print);
+                Console.WriteLine(VariableData.Name + ", " + print);
         }
 
         internal static void PrintAvaliableCommandsOrHelp(int j, bool ln)
         {
-            var ch = true;
+            bool ch;
 
-            for (int i = 0; i < Program.AvalibleComands.GetLength(0); i++)
+            for (int i = 0; i < VariableData.Length; i++)
             {
                 ch = true;
                 if (Program.AvalibleComands[i, 0] == "/echo")
                 {
-                    if (Program.Name != null)
+                    if (VariableData.Name != null)
                         Console.Write(Program.AvalibleComands[i, j]);
                     else
                         ch = false;
@@ -37,7 +38,7 @@ namespace Otus_homeWork
                 else
                     Console.Write(Program.AvalibleComands[i, j]);
 
-                if (ch)
+                if (ch && i< VariableData.Length -1)
                 {
                     if (ln)
                         Console.WriteLine();

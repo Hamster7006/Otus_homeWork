@@ -1,4 +1,6 @@
-﻿namespace Otus_homeWork
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Otus_homeWork
 {
     internal class BaseMenuFunctionHW1
     {
@@ -18,10 +20,10 @@
         internal static void Start()
         {
             Console.WriteLine("Давайите познакомимся, укажите как к вам обращаться");
-            Program.Name = Console.ReadLine();
-            if (!string.IsNullOrEmpty(Program.Name))
+            VariableData.Name = Console.ReadLine();
+            if (!string.IsNullOrEmpty(VariableData.Name))
             {
-                Console.WriteLine("Очень приятно, " + Program.Name);
+                Console.WriteLine("Очень приятно, " + VariableData.Name);
                 HelpFunctions.Pause();
             }
             else
@@ -31,8 +33,8 @@
         }
         internal static void Info()
         {
-            Console.WriteLine($"Версия программы: {Program.VersionBot}");
-            Console.WriteLine($"Дата релиза программы: {Program.DateRelise}");
+            Console.WriteLine($"Версия программы: {VariableData.VersionBot}");
+            Console.WriteLine($"Дата релиза программы: {VariableData.DateRelise}");
             HelpFunctions.Pause();
         }
     }
