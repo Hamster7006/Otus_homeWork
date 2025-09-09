@@ -1,4 +1,6 @@
-﻿namespace Otus_homeWork
+﻿using Otus_homeWork.Help;
+
+namespace Otus_homeWork
 {
     internal class AddFunctionsHW2
     {

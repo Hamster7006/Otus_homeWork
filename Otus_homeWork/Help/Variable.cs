@@ -1,8 +1,8 @@
-﻿namespace Otus_homeWork
+﻿namespace Otus_homeWork.Help
 {
     public static class VariableData
     {
-        private static string? name;
+        //private static string? name;
         internal static string[,] AvalibleComands = new string[8, 2];
         private static readonly int len = AvalibleComands.GetLength(0);
 
@@ -12,11 +12,11 @@
                 return len;
             }
         }
-        public static string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
+        //public static string Name
+        //{
+        //    get { return name; }
+        //    set { name = value; }
+        //}
 
         public static string VersionBot
         {

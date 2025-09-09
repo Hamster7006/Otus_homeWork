@@ -1,4 +1,4 @@
-﻿namespace Otus_homeWork
+﻿namespace Otus_homeWork.Help
 {
     internal class HelpFunctions
     {

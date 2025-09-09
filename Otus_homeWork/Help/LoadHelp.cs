@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Otus_homeWork
+namespace Otus_homeWork.Help
 {
     internal class LoadHelp
     {

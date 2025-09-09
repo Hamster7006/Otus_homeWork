@@ -1,4 +1,6 @@
-﻿namespace Otus_homeWork
+﻿using Otus_homeWork.Help;
+
+namespace Otus_homeWork
 {
     public class Program
     {
@@ -30,7 +32,7 @@
                     case "/info":
                         BaseMenuFunctionHW1.Info();
                         break;
-                    case string s when !string.IsNullOrEmpty(VariableData.Name) && s.StartsWith("/echo ") && !(s.Equals("/echo") || s.Equals("/echo ")):
+                    case string s when BaseMenuFunctionHW1.UserData.TelegramUserName != "NoName" && s.StartsWith("/echo ") && !(s.Equals("/echo") || s.Equals("/echo ")):
                         BaseMenuFunctionHW1.Echo(s.Replace("/echo ", ""));
                         break;
                     case string s when s.StartsWith("/removetask "):
@@ -52,7 +54,5 @@
                 }
             } while (!exitCheck);
         }
-
-
     }
 }

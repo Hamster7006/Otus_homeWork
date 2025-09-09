@@ -1,7 +1,12 @@
-﻿namespace Otus_homeWork
+﻿using Otus_homeWork.Help;
+using Otus_homeWork.ToDO;
+
+namespace Otus_homeWork
 {
     internal class BaseMenuFunctionHW1
     {
+        internal static ToDoUser UserData = new();
+
         internal static void Help()
         {
             Console.Clear();
@@ -18,10 +23,13 @@
         internal static void Start()
         {
             Console.WriteLine("Давайите познакомимся, укажите как к вам обращаться");
-            VariableData.Name = Console.ReadLine();
-            if (!string.IsNullOrEmpty(VariableData.Name))
+            var  name = Console.ReadLine();
+            if (!string.IsNullOrEmpty(name))
             {
-                Console.WriteLine("Очень приятно, " + VariableData.Name);
+                Console.WriteLine("Очень приятно, " + name);
+                //ToDoUser UserData = new ToDoUser(name);
+                UserData.TelegramUserName = name;
+
                 HelpFunctions.Pause();
             }
             else
