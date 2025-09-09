@@ -1,4 +1,6 @@
-﻿namespace Otus_homeWork.Help
+﻿using Otus_homeWork.Function;
+
+namespace Otus_homeWork.Help
 {
     internal class HelpFunctions
     {
@@ -9,12 +11,12 @@
             Console.Clear();
         }
 
-        internal static void NullOrWhiteSpaseName(string? print = null)
+        internal static void CheckName(string? print = null)
         {
-            if (string.IsNullOrEmpty(VariableData.Name))
+            if (BaseMenuFunctionHW1.UserData.TelegramUserName != "NoName")
                 Console.WriteLine(print);
             else
-                Console.WriteLine(VariableData.Name + ", " + print);
+                Console.WriteLine(BaseMenuFunctionHW1.UserData.TelegramUserName + ", " + print);
         }
 
         internal static void PrintAvaliableCommandsOrHelp(int j, bool ln)
@@ -26,7 +28,7 @@
                 ch = true;
                 if (VariableData.AvalibleComands[i, 0] == "/echo")
                 {
-                    if (VariableData.Name != null)
+                    if (BaseMenuFunctionHW1.UserData.TelegramUserName != "NoName")
                         Console.Write(VariableData.AvalibleComands[i, j]);
                     else
                         ch = false;
@@ -34,7 +36,7 @@
                 else
                     Console.Write(VariableData.AvalibleComands[i, j]);
 
-                if (ch && i< VariableData.Length -1)
+                if (ch && i < VariableData.Length - 1)
                 {
                     if (ln)
                         Console.WriteLine();
@@ -47,5 +49,5 @@
 
 
     }
-  
+
 }

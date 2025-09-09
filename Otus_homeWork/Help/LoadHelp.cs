@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Otus_homeWork.Help
+﻿namespace Otus_homeWork.Help
 {
     internal class LoadHelp
     {
@@ -26,13 +20,21 @@ namespace Otus_homeWork.Help
                 "     Команда без параметра запросит ввод задачи для добавления \n\r" +
                 "     Команда с параметром (строка) добавит задачу в список.";
             VariableData.AvalibleComands[6, 0] = "/showtasks";
-            VariableData.AvalibleComands[6, 1] = "Команда /showtasks Вывести список задач";
-            VariableData.AvalibleComands[7, 0] = "/removetask";
-            VariableData.AvalibleComands[7, 1] = "Команда /removetask [#] удалить задачу из списка. \n\r" +
-                "     Команда без параметра выведет список доступных задач для выбора номера указание номера задачи для удаления. \n\r" +
+            VariableData.AvalibleComands[6, 1] = "Команда /showtasks Вывести список актуальных (не выполненных) задач";
+            VariableData.AvalibleComands[7, 0] = "/showalltasks";
+            VariableData.AvalibleComands[7, 1] = "Команда /showalltasks Вывести список всех задач";
+            VariableData.AvalibleComands[8, 0] = "/removetask";
+            VariableData.AvalibleComands[8, 1] = "Команда /removetask [#] удалить задачу из списка. \n\r" +
+                "     Команда без параметра выведет список доступных задач для выбора номера и запросит указание номера задачи для удаления. \n\r" +
                 "     Команда с параметром 'число' удалит задачу под указанным номером, если она существует \n\r" +
                 "     Команда с параметром 'число1,число2..' удалит задачи под указанными номерами, если они существует. Разделитель ',' \n\r" +
                 "     Параметр 'all' удалит весь список";
+            VariableData.AvalibleComands[9, 0] = "/completetask";
+            VariableData.AvalibleComands[9, 1] = "Команда /completetask [#] пометить задачу выполненной из списка. \n\r" +
+                "     Команда без параметра выведет список доступных задач для выбора ID и запросит указание ID задачи для выполненния. \n\r" +
+                "     Команда с параметром 'ID' пометит задачу под указанным ID ка выполненную, если она существует \n\r" +
+                "     Параметр 'all' пометит выполненным весь список";
+
         }
     }
 }

@@ -3,12 +3,13 @@
     public static class VariableData
     {
         //private static string? name;
-        internal static string[,] AvalibleComands = new string[8, 2];
+        internal static string[,] AvalibleComands = new string[10, 2];
         private static readonly int len = AvalibleComands.GetLength(0);
 
         public static int Length
         {
-            get {
+            get
+            {
                 return len;
             }
         }
@@ -22,7 +23,7 @@
         {
             get
             {
-                return "1.2.1";
+                return "1.3.0";
             }
         }
 
@@ -30,7 +31,7 @@
         {
             get
             {
-                return "16.08.2025";
+                return "10.09.2025";
             }
         }
     }
