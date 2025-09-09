@@ -3,7 +3,8 @@
     public static class VariableData
     {
         private static string? name;
-        private static readonly int len = Program.AvalibleComands.GetLength(0);
+        internal static string[,] AvalibleComands = new string[8, 2];
+        private static readonly int len = AvalibleComands.GetLength(0);
 
         public static int Length
         {

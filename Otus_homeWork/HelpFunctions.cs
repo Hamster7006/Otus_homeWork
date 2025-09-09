@@ -24,15 +24,15 @@
             for (int i = 0; i < VariableData.Length; i++)
             {
                 ch = true;
-                if (Program.AvalibleComands[i, 0] == "/echo")
+                if (VariableData.AvalibleComands[i, 0] == "/echo")
                 {
                     if (VariableData.Name != null)
-                        Console.Write(Program.AvalibleComands[i, j]);
+                        Console.Write(VariableData.AvalibleComands[i, j]);
                     else
                         ch = false;
                 }
                 else
-                    Console.Write(Program.AvalibleComands[i, j]);
+                    Console.Write(VariableData.AvalibleComands[i, j]);
 
                 if (ch && i< VariableData.Length -1)
                 {
@@ -44,6 +44,8 @@
             }
             Console.WriteLine();
         }
+
+
     }
   
 }

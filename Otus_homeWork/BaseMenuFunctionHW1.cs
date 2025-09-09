@@ -35,5 +35,7 @@
             Console.WriteLine($"Дата релиза программы: {VariableData.DateRelise}");
             HelpFunctions.Pause();
         }
+
+
     }
 }
