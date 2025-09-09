@@ -2,7 +2,6 @@
 {
     public static class VariableData
     {
-        //private static string? name;
         internal static string[,] AvalibleComands = new string[10, 2];
         private static readonly int len = AvalibleComands.GetLength(0);
 
@@ -13,12 +12,6 @@
                 return len;
             }
         }
-        //public static string Name
-        //{
-        //    get { return name; }
-        //    set { name = value; }
-        //}
-
         public static string VersionBot
         {
             get

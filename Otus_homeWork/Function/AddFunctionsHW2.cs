@@ -20,11 +20,10 @@ namespace Otus_homeWork.Function
             {
                 HelpFunctions.CheckName("Напишите задачу для добавления в список");
                 inputData = Console.ReadLine();
-#pragma warning disable CS8604 // Possible null reference argument.
-                ToDoItem temp = new(BaseMenuFunctionHW1.UserData, name: inputData);
-#pragma warning restore CS8604 // Possible null reference argument.
+                
                 if (!string.IsNullOrEmpty(inputData))
                 {
+                    ToDoItem temp = new(BaseMenuFunctionHW1.UserData, name: inputData);
                     Program.TaskList.Add(temp);
                     if (Program.TaskList.Contains(temp))
                         HelpFunctions.CheckName($"Задача '{inputData}' успешно добавлена");
@@ -96,7 +95,6 @@ namespace Otus_homeWork.Function
         {
             var index = 1;
             var leng = 8;
-            //Console.Clear();
 
             if (Program.TaskList.Count == 0)
                 Console.WriteLine("Список пуст");
@@ -110,9 +108,8 @@ namespace Otus_homeWork.Function
                         if (task.State == ToDoItemState.Active)
                             chStateActive = true;
                     }
-
-
                 }
+
                 if (!allPrint && !chStateActive)
                     HelpFunctions.CheckName("Активных задач не обнаружено");
                 else
@@ -125,28 +122,23 @@ namespace Otus_homeWork.Function
 
                     HelpFunctions.CheckName("Вот список задач");
                     Console.Write("┌");
-                    PrintFrame('-', 6, '┬'); // Номер
-                    PrintFrame('-', 37, '┬'); // ID
-                    PrintFrame('-', 20, '┬'); // CreateAT
                     if (allPrint)
-                        PrintFrame('-', 10, '┬'); // State
+                        HelpFunctions.PrintBorder('-', [6, 37, 20, leng], '┬', '┐');
+                    else
+                        HelpFunctions.PrintBorder('-', [6, 37, 20, 10, leng], '┬', '┐');
 
-                    PrintFrame('-', leng, '┐', true); // Задача
                     if (allPrint)
                         Console.Write("| Номер | {0,36} | {1,19} | Состояние | Задача", "ID", "Создана");
                     else
                         Console.Write("| Номер | {0,36} | {1,19} | Задача", "ID", "Создана");
 
-                    PrintFrame(' ', leng - 7, '|', true);
+                    HelpFunctions.PrintFrame(' ', leng - 7, '|', true);
 
                     Console.Write("├");
-                    PrintFrame('-', 6, '┼'); // Номер
-                    PrintFrame('-', 37, '┼'); // ID
-                    PrintFrame('-', 20, '┼'); // CreateAT
                     if (allPrint)
-                        PrintFrame('-', 10, '┼'); // State
-
-                    PrintFrame('-', leng, '┤', true); // Задача
+                        HelpFunctions.PrintBorder('-', [6, 37, 20, leng], '┼', '┤');
+                    else
+                        HelpFunctions.PrintBorder('-', [6, 37, 20, 10, leng], '┼', '┤');
 
                     bool printBorder;
                     for (int i = 0; i < Program.TaskList.Count; i++)
@@ -161,7 +153,7 @@ namespace Otus_homeWork.Function
                                         Program.TaskList[i].State,
                                         Program.TaskList[i].TaskName
                                     );
-                            PrintFrame(' ', leng - Program.TaskList[i].TaskName.Length - 1, '|', true);
+                            HelpFunctions.PrintFrame(' ', leng - Program.TaskList[i].TaskName.Length - 1, '|', true);
                         }
                         else if (Program.TaskList[i].State == ToDoItemState.Active)
                         {
@@ -171,7 +163,7 @@ namespace Otus_homeWork.Function
                                         Program.TaskList[i].CreateAT.ToString(),
                                         Program.TaskList[i].TaskName
                                     );
-                            PrintFrame(' ', leng - Program.TaskList[i].TaskName.Length - 1, '|', true);
+                            HelpFunctions.PrintFrame(' ', leng - Program.TaskList[i].TaskName.Length - 1, '|', true);
                         }
                         else
                             printBorder = false;
@@ -180,39 +172,24 @@ namespace Otus_homeWork.Function
                             if (i == Program.TaskList.Count - 1)
                             {
                                 Console.Write("└");
-                                PrintFrame('-', 6, '┴'); // Номер
-                                PrintFrame('-', 37, '┴'); // ID
-                                PrintFrame('-', 20, '┴'); // CreateAT
                                 if (allPrint)
-                                    PrintFrame('-', 10, '┴'); // State
-                                PrintFrame('-', leng, '┘', true); // Задача
+                                    HelpFunctions.PrintBorder('-', [6, 37, 20, leng], '┼', '┤');
+                                else
+                                    HelpFunctions.PrintBorder('-', [6, 37, 20, 10, leng], '┼', '┤');
                             }
                             else
                             {
                                 Console.Write("├");
-                                PrintFrame('-', 6, '┼'); // Номер
-                                PrintFrame('-', 37, '┼'); // ID
-                                PrintFrame('-', 20, '┼'); // CreateAT
                                 if (allPrint)
-                                    PrintFrame('-', 10, '┼'); // State
-                                PrintFrame('-', leng, '┤', true); // Задача
+                                    HelpFunctions.PrintBorder('-', [6,37,20,leng], '┼','┤');
+                                else
+                                    HelpFunctions.PrintBorder('-', [6, 37, 20, 10, leng], '┼', '┤');
                             }
                     }
                 }
             }
             if (pause)
                 HelpFunctions.Pause();
-        }
-
-        static void PrintFrame(char start, int len, char end, bool wl = false)
-        {
-            for (int i = 0; i <= len; i++)
-            {
-                Console.Write(start);
-            }
-            Console.Write(end);
-            if (wl)
-                Console.WriteLine();
         }
     }
 }

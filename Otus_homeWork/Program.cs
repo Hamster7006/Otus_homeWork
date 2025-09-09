@@ -12,14 +12,14 @@ namespace Otus_homeWork
         static void Main()
         {
             LoadMenu();
-            Test.TestLoad();
+            //Test.TestLoad();
 
         }
 
         internal static void LoadMenu()
         {
             var exitCheck = false;
-            LoadHelp.LoadCommands();
+            HelpFunctions.InitCommandsAndHelp();
 
             do
             {
