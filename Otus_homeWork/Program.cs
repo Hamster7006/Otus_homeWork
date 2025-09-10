@@ -13,7 +13,6 @@ namespace Otus_homeWork
         {
             LoadMenu();
             //Test.TestLoad();
-
         }
 
         internal static void LoadMenu()
@@ -42,7 +41,7 @@ namespace Otus_homeWork
                     case "/info":
                         BaseMenuFunctionHW1.Info();
                         break;
-                    case string s when BaseMenuFunctionHW1.UserData.TelegramUserName != "NoName" && s.StartsWith("/echo ") && !(s.Equals("/echo") || s.Equals("/echo ")):
+                    case string s when BaseMenuFunctionHW1.UserData.TelegramUserName != null && s.StartsWith("/echo ") && !(s.Equals("/echo") || s.Equals("/echo ")):
                         BaseMenuFunctionHW1.Echo(s.Replace("/echo ", ""));
                         break;
                     case "/exit":

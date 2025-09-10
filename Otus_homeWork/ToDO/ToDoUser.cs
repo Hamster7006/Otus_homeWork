@@ -8,8 +8,7 @@
         public Guid UserId => userId;
         public string TelegramUserName { get; set; }
         public DateTime RegisteredAt => registeredAt;
-        public ToDoUser(string telegramUserName = "NoName")
-
+        public ToDoUser(string telegramUserName = null)
         {
             registeredAt = DateTime.UtcNow;
             userId = Guid.NewGuid();

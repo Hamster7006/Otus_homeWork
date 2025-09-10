@@ -13,7 +13,7 @@ namespace Otus_homeWork.Help
 
         internal static void CheckName(string? print = null)
         {
-            if (BaseMenuFunctionHW1.UserData.TelegramUserName != "NoName")
+            if (BaseMenuFunctionHW1.UserData.TelegramUserName != null)
                 Console.WriteLine(print);
             else
                 Console.WriteLine(BaseMenuFunctionHW1.UserData.TelegramUserName + ", " + print);
@@ -28,7 +28,7 @@ namespace Otus_homeWork.Help
                 ch = true;
                 if (VariableData.AvalibleComands[i, 0] == "/echo")
                 {
-                    if (BaseMenuFunctionHW1.UserData.TelegramUserName != "NoName")
+                    if (BaseMenuFunctionHW1.UserData.TelegramUserName != null)
                         Console.Write(VariableData.AvalibleComands[i, j]);
                     else
                         ch = false;

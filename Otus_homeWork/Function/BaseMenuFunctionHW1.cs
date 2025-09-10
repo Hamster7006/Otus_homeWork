@@ -5,7 +5,7 @@ namespace Otus_homeWork.Function
 {
     internal class BaseMenuFunctionHW1
     {
-        internal static ToDoUser UserData = new("NoName");
+        internal static ToDoUser UserData = new();
         internal static void Help()
         {
             Console.Clear();
@@ -26,9 +26,7 @@ namespace Otus_homeWork.Function
             if (!string.IsNullOrEmpty(name))
             {
                 Console.WriteLine("Очень приятно, " + name);
-                UserData = new(name);
-                // \/ ИЛИ /\ ? ХЗ ЧТО ЛУЧШЕ ИСПОЛЬЗОВАТЬ 
-                //UserData.TelegramUserName = name;
+                UserData.TelegramUserName = name;
 
                 HelpFunctions.Pause();
             }
