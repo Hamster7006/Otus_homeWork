@@ -2,16 +2,13 @@
 {
     internal class ToDoUser
     {
-        private readonly DateTime registeredAt;
-        private readonly Guid userId;
-
-        public Guid UserId => userId;
+        public Guid UserId { get; set; }
         public string TelegramUserName { get; set; }
-        public DateTime RegisteredAt => registeredAt;
+        public DateTime RegisteredAt { get; set; }
         public ToDoUser(string telegramUserName = null)
         {
-            registeredAt = DateTime.UtcNow;
-            userId = Guid.NewGuid();
+            RegisteredAt = DateTime.UtcNow;
+            UserId = Guid.NewGuid();
             TelegramUserName = telegramUserName;
         }
     }
