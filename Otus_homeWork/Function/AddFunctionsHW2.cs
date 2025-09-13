@@ -11,10 +11,7 @@ namespace Otus_homeWork.Function
             {
                 var temp = new ToDoItem(BaseMenuFunctionHW1.UserData, inputData);
                 Program.TaskList.Add(temp);
-                if (Program.TaskList.Contains(temp))
-                    HelpFunctions.CheckName($"Задача '{inputData}' успешно добавлена");
-                else
-                    HelpFunctions.CheckName("Ошибка добавления");
+                HelpFunctions.CheckName($"Задача '{inputData}' успешно добавлена");
             }
             else
             {
