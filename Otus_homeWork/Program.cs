@@ -1,4 +1,5 @@
-﻿using Otus_homeWork.Function;
+﻿using Otus_homeWork.CustomExept;
+using Otus_homeWork.Function;
 using Otus_homeWork.Help;
 using Otus_homeWork.ToDO;
 
@@ -11,7 +12,15 @@ namespace Otus_homeWork
 
         static void Main()
         {
-            LoadMenu();
+            try
+            {
+                LoadMenu();
+            }
+            catch (Exception ex){
+                WriteConExept.WriteConsoleExeption(ex);
+            }
+
+            
             //Test.TestLoad();
         }
 
