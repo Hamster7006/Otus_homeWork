@@ -8,12 +8,21 @@ namespace Otus_homeWork.CustomExept
 {
     internal class TaskCountLimitException : Exception
     {
-        public TaskCountLimitException(string message)
-                : base (message)
-        { }
-
         public TaskCountLimitException(int taskCountLimit)
-                : this($"Превышено максимальное количество задач равное {taskCountLimit}")
+                : base($"Превышено максимальное количество задач равное {taskCountLimit}")
+        { }
+    }
+    internal class TaskLengthLimitException : Exception
+    {
+        public TaskLengthLimitException(int taskLength, int taskLengthLimit)
+                : base($"Длина задачи '{taskLength}' превышает максимально допустимое значение {taskLengthLimit}")
+        { }
+    }
+
+    internal class DuplicateTaskException : Exception
+    {
+        public DuplicateTaskException(string task)
+                : base( $"Задача '{ task}' уже существует")
         { }
     }
 }

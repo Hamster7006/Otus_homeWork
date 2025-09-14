@@ -4,8 +4,10 @@ namespace Otus_homeWork.Help
 {
     internal static class HelpFunctions
     {
-        internal static void Pause()
+        internal static void Pause(string input = null)
         {
+            if (input != null)
+                Console.WriteLine(input);
             Console.WriteLine("\n\r \n\rДля продолжения нажмите любую клавишу");
             Console.ReadKey();
             Console.Clear();
@@ -60,15 +62,15 @@ namespace Otus_homeWork.Help
             VariableData.AvalibleComands[4, 0] = "/exit";
             VariableData.AvalibleComands[4, 1] = "Команда /exit выход из программы";
             VariableData.AvalibleComands[5, 0] = "/addtask";
-            VariableData.AvalibleComands[5, 1] = "Команда /addtask [#] добавить задачу в список. \n\r" +
-                "     Команда без параметра запросит ввод задачи для добавления \n\r" +
-                "     Команда с параметром (строка) добавит задачу в список.";
+            VariableData.AvalibleComands[5, 1] = "Команда '/addtask <int> <string>' добавить задачу в список. \n\r" +
+                "     /addtask - Команда без параметра запросит ввод максимальной длины и наименование задачи для добавления \n\r" +
+                "     /addtask <int> <string> - Команда с параметрами (число - максимальная длина имени) (строка - наименование задачи) добавит задачу в список.";
             VariableData.AvalibleComands[6, 0] = "/showtasks";
             VariableData.AvalibleComands[6, 1] = "Команда /showtasks Вывести список актуальных (не выполненных) задач";
             VariableData.AvalibleComands[7, 0] = "/showalltasks";
             VariableData.AvalibleComands[7, 1] = "Команда /showalltasks Вывести список всех задач";
             VariableData.AvalibleComands[8, 0] = "/removetask";
-            VariableData.AvalibleComands[8, 1] = "Команда /removetask [#] удалить задачу из списка. \n\r" +
+            VariableData.AvalibleComands[8, 1] = "Команда /removetask <int> удалить задачу из списка. \n\r" +
                 "     Команда без параметра выведет список доступных задач для выбора номера и запросит указание номера задачи для удаления. \n\r" +
                 "     Команда с параметром 'число' удалит задачу под указанным номером, если она существует \n\r" +
                 "     Команда с параметром 'число1,число2..' удалит задачи под указанными номерами, если они существует. Разделитель ',' \n\r" +
@@ -112,7 +114,7 @@ namespace Otus_homeWork.Help
                 throw new ArgumentException($"Ошибка ввода параметра (Не число).");
             
             if (returnInt < min || returnInt > max)
-                throw new ArgumentException($"Ошибка ввода параметра (Меньше 1 или больше 100).");
+                throw new ArgumentException($"Ошибка ввода параметра (Меньше {min} или больше {max}).");
             
             
             return returnInt;

@@ -9,40 +9,64 @@ namespace Otus_homeWork
     {
         internal static int MaxLengthList = 0;
         internal static List<ToDoItem> TaskList = new List<ToDoItem> (100);
+        private static int testCase = 0;
 
         static void Main()
         {
+            var paramStart = 2; // 0 - обычный запуск | 2 - автотесты 
             var checkStopApp = false;
             do
             {
-                
                 try
                 {
                     if (MaxLengthList == 0)
-                        LoadMenuFirst();
+                        StartApp(paramStart);
                     else
-                        LoadMenuSecond();
+                        StartApp(paramStart+1);
                 }
                 catch (TaskCountLimitException ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    WriteConExept.WriteConsoleExeption(ex);
                 }
                 catch (ArgumentException ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    WriteConExept.WriteConsoleExeption(ex);
+                }
+                catch (TaskLengthLimitException ex)
+                {
+                    WriteConExept.WriteConsoleExeption(ex);
+                }
+                catch (DuplicateTaskException ex)
+                {
+                    WriteConExept.WriteConsoleExeption(ex);
                 }
                 catch (Exception ex)
                 {
-                    WriteConExept.WriteConsoleExeption(ex);
+                    WriteConExept.WriteConsoleExeption(ex, true);
                     checkStopApp = true;
-                }
-
-                HelpFunctions.Pause();
+                }                
                 Console.Clear();
-
             } while (!checkStopApp);
-            
-            //Test.TestLoad();
+        }
+        internal static void StartApp(int param)
+        {
+            switch (param)
+            {
+                case 0:
+                    LoadMenuFirst();
+                    break;
+                case 1:
+                    LoadMenuSecond();
+                    break;
+                case 2:
+                    MaxLengthList = 10;
+                    Test.TestLoad();
+                    break;
+                default:
+                    testCase++;
+                    Test.TestHW(testCase);
+                    break;
+            }
         }
 
         internal static void LoadMenuFirst()

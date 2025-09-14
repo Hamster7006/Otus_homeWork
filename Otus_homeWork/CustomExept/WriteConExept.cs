@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Otus_homeWork.Help;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,23 @@ namespace Otus_homeWork.CustomExept
 {
     internal class WriteConExept
     {
-        internal static void WriteConsoleExeption(Exception ex)
+        internal static void WriteConsoleExeption(Exception ex, bool fullData = false)
         {
-            Console.WriteLine("--------");
-            Console.WriteLine(ex.GetType());
-            Console.WriteLine("--------");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("----ERROR----");
+            if (fullData)
+                Console.WriteLine(ex.GetType());
+
             Console.WriteLine(ex.Message);
-            Console.WriteLine("--------");
-            Console.WriteLine(ex.StackTrace);
-            Console.WriteLine("--------");
-            Console.WriteLine(ex.InnerException);
+
+            if (fullData)
+                Console.WriteLine(ex.StackTrace);
+
+            if (fullData)
+                Console.WriteLine(ex.InnerException);
+
+            Console.ResetColor();
+            HelpFunctions.Pause();
         }
     }
 }

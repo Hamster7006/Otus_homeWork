@@ -1,6 +1,7 @@
 ﻿using Otus_homeWork.CustomExept;
 using Otus_homeWork.Help;
 using Otus_homeWork.ToDO;
+using System.Linq;
 
 namespace Otus_homeWork.Function
 {
@@ -12,17 +13,40 @@ namespace Otus_homeWork.Function
             {
                 if (!string.IsNullOrEmpty(inputData))
                 {
+                    var lengthTaskInput = inputData.Split(' ')[0];
+                    var taskLengthLimittaskLength = HelpFunctions.ParseAndValidateInt(lengthTaskInput, 1, 100);
+                    inputData = inputData.Replace($"{lengthTaskInput} ","");
+
+                    if (inputData.Length > taskLengthLimittaskLength)
+                        throw new TaskLengthLimitException(inputData.Length, taskLengthLimittaskLength);
+
+                    if (Program.TaskList.Count !=0)
+                        foreach (var loadedTask in Program.TaskList)
+                        {
+                            if (loadedTask.TaskName == inputData)
+                                throw new DuplicateTaskException(inputData);
+                        }
+
                     var temp = new ToDoItem(BaseMenuFunctionHW1.UserData, inputData);
+
+                    
                     Program.TaskList.Add(temp);
                     HelpFunctions.CheckName($"Задача '{inputData}' успешно добавлена");
                 }
                 else
                 {
+                    Console.WriteLine("Введите максимально допустимое длину задачи:");
+                    var tempIn = Console.ReadLine();
+                    var taskLengthLimittaskLength = HelpFunctions.ParseAndValidateInt(tempIn, 1, 100);
+
                     HelpFunctions.CheckName("Напишите задачу для добавления в список");
                     inputData = Console.ReadLine();
 
                     if (!string.IsNullOrEmpty(inputData))
                     {
+                        if (inputData.Length > taskLengthLimittaskLength)
+                            throw new TaskLengthLimitException(inputData.Length, taskLengthLimittaskLength);
+
                         ToDoItem temp = new(BaseMenuFunctionHW1.UserData, name: inputData);
                         Program.TaskList.Add(temp);
                         HelpFunctions.CheckName($"Задача '{inputData}' успешно добавлена");
@@ -36,9 +60,9 @@ namespace Otus_homeWork.Function
                 throw new TaskCountLimitException(Program.MaxLengthList);
         }
 
-        internal static void RemoveTaskList(string? parm = null, bool ch = true)
+        internal static void RemoveTaskList(string? inputParam = null, bool checkPrintPause = true)
         {
-            if (parm == null)
+            if (inputParam == null)
             {
                 Console.Clear();
                 PrintTaskList(true, false);
@@ -49,18 +73,18 @@ namespace Otus_homeWork.Function
                 else
                     RemoveTaskList(index, false);
             }
-            else if (parm == "all")
+            else if (inputParam == "all")
             {
                 Program.TaskList.RemoveRange(0, Program.TaskList.Count);
                 Console.WriteLine("Список очищен");
             }
-            else if (parm.Contains(','))
+            else if (inputParam.Contains(','))
             {
                 var changeInd = 0;
 
                 List<string> indArr = [];
 
-                foreach (string str in parm.Split(','))
+                foreach (string str in inputParam.Split(','))
                 {
                     if (!indArr.Contains(str))
                         indArr.Add(str);
@@ -76,7 +100,7 @@ namespace Otus_homeWork.Function
                     }
                 }
             }
-            else if (int.TryParse(parm, out var res) && res >= 1 && res <= Program.TaskList.Count)
+            else if (int.TryParse(inputParam, out var res) && res >= 1 && res <= Program.TaskList.Count)
             {
                 var tempTask = Program.TaskList[res - 1];
                 Program.TaskList.RemoveAt(res - 1);
@@ -86,7 +110,7 @@ namespace Otus_homeWork.Function
             {
                 Console.WriteLine("Не корректный ввод номерa задачи.");
             }
-            if (ch)
+            if (checkPrintPause)
                 HelpFunctions.Pause();
         }
 
@@ -123,9 +147,9 @@ namespace Otus_homeWork.Function
                     HelpFunctions.CheckName("Вот список задач");
                     Console.Write("┌");
                     if (allPrint)
-                        HelpFunctions.PrintBorder('-', [6, 37, 20, leng], '┬', '┐');
+                        HelpFunctions.PrintBorder('─', [6, 37, 20, 10, leng], '┬', '┐'); 
                     else
-                        HelpFunctions.PrintBorder('-', [6, 37, 20, 10, leng], '┬', '┐');
+                        HelpFunctions.PrintBorder('─', [6, 37, 20, leng], '┬', '┐');
 
                     if (allPrint)
                         Console.Write("| Номер | {0,36} | {1,19} | Состояние | Задача", "ID", "Создана");
@@ -136,9 +160,9 @@ namespace Otus_homeWork.Function
 
                     Console.Write("├");
                     if (allPrint)
-                        HelpFunctions.PrintBorder('-', [6, 37, 20, leng], '┼', '┤');
+                        HelpFunctions.PrintBorder('─', [6, 37, 20, 10, leng], '┼', '┤'); 
                     else
-                        HelpFunctions.PrintBorder('-', [6, 37, 20, 10, leng], '┼', '┤');
+                        HelpFunctions.PrintBorder('─', [6, 37, 20, leng], '┼', '┤');
 
                     bool printBorder;
                     for (int i = 0; i < Program.TaskList.Count; i++)
@@ -173,17 +197,17 @@ namespace Otus_homeWork.Function
                             {
                                 Console.Write("└");
                                 if (allPrint)
-                                    HelpFunctions.PrintBorder('-', [6, 37, 20, leng], '┼', '┤');
+                                    HelpFunctions.PrintBorder('─', [6, 37, 20, 10, leng], '┴', '┘'); 
                                 else
-                                    HelpFunctions.PrintBorder('-', [6, 37, 20, 10, leng], '┼', '┤');
+                                    HelpFunctions.PrintBorder('─', [6, 37, 20, leng], '┴', '┘');
                             }
                             else
                             {
                                 Console.Write("├");
                                 if (allPrint)
-                                    HelpFunctions.PrintBorder('-', [6,37,20,leng], '┼','┤');
+                                    HelpFunctions.PrintBorder('─', [6, 37, 20, 10, leng], '┼', '┤');
                                 else
-                                    HelpFunctions.PrintBorder('-', [6, 37, 20, 10, leng], '┼', '┤');
+                                    HelpFunctions.PrintBorder('─', [6, 37, 20, leng], '┼', '┤');
                             }
                     }
                 }
