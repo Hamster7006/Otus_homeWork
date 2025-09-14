@@ -1,4 +1,5 @@
-﻿using Otus_homeWork.Help;
+﻿using Otus_homeWork.CustomExept;
+using Otus_homeWork.Help;
 using Otus_homeWork.ToDO;
 
 namespace Otus_homeWork.Function
@@ -7,27 +8,32 @@ namespace Otus_homeWork.Function
     {
         internal static void AddTaskList(string? inputData = null)
         {
-            if (!string.IsNullOrEmpty(inputData))
+            if (Program.TaskList.Count + 1 <= Program.MaxLengthList)
             {
-                var temp = new ToDoItem(BaseMenuFunctionHW1.UserData, inputData);
-                Program.TaskList.Add(temp);
-                HelpFunctions.CheckName($"Задача '{inputData}' успешно добавлена");
-            }
-            else
-            {
-                HelpFunctions.CheckName("Напишите задачу для добавления в список");
-                inputData = Console.ReadLine();
-                
                 if (!string.IsNullOrEmpty(inputData))
                 {
-                    ToDoItem temp = new(BaseMenuFunctionHW1.UserData, name: inputData);
+                    var temp = new ToDoItem(BaseMenuFunctionHW1.UserData, inputData);
                     Program.TaskList.Add(temp);
                     HelpFunctions.CheckName($"Задача '{inputData}' успешно добавлена");
                 }
                 else
-                    HelpFunctions.CheckName("Не корректный ввод задачи");
+                {
+                    HelpFunctions.CheckName("Напишите задачу для добавления в список");
+                    inputData = Console.ReadLine();
+
+                    if (!string.IsNullOrEmpty(inputData))
+                    {
+                        ToDoItem temp = new(BaseMenuFunctionHW1.UserData, name: inputData);
+                        Program.TaskList.Add(temp);
+                        HelpFunctions.CheckName($"Задача '{inputData}' успешно добавлена");
+                    }
+                    else
+                        HelpFunctions.CheckName("Не корректный ввод задачи");
+                }
+                HelpFunctions.Pause();
             }
-            HelpFunctions.Pause();
+            else
+                throw new TaskCountLimitException(Program.MaxLengthList);
         }
 
         internal static void RemoveTaskList(string? parm = null, bool ch = true)

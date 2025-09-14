@@ -7,28 +7,56 @@ namespace Otus_homeWork
 {
     public class Program
     {
-
-        internal static List<ToDoItem> TaskList = [];
+        internal static int MaxLengthList = 0;
+        internal static List<ToDoItem> TaskList = new List<ToDoItem> (100);
 
         static void Main()
         {
-            try
+            var checkStopApp = false;
+            do
             {
-                LoadMenu();
-            }
-            catch (Exception ex){
-                WriteConExept.WriteConsoleExeption(ex);
-            }
+                
+                try
+                {
+                    if (MaxLengthList == 0)
+                        LoadMenuFirst();
+                    else
+                        LoadMenuSecond();
+                }
+                catch (TaskCountLimitException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    WriteConExept.WriteConsoleExeption(ex);
+                    checkStopApp = true;
+                }
 
+                HelpFunctions.Pause();
+                Console.Clear();
+
+            } while (!checkStopApp);
             
             //Test.TestLoad();
         }
 
-        internal static void LoadMenu()
+        internal static void LoadMenuFirst()
+        {
+            HelpFunctions.InitCommandsAndHelp();
+            Console.WriteLine("Введите максимально допустимое количество задач:");
+            var tempIn = Console.ReadLine();
+            MaxLengthList = HelpFunctions.ParseAndValidateInt(tempIn, 1, 100);
+            Console.Clear();
+            LoadMenuSecond();
+        }
+        internal static void LoadMenuSecond()
         {
             var exitCheck = false;
-            HelpFunctions.InitCommandsAndHelp();
-
             do
             {
                 HelpFunctions.CheckName("Добро пожаловать в прогрaмму!");

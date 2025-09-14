@@ -13,7 +13,7 @@ namespace Otus_homeWork.Help
 
         internal static void CheckName(string? print = null)
         {
-            if (BaseMenuFunctionHW1.UserData.TelegramUserName != null)
+            if (BaseMenuFunctionHW1.UserData.TelegramUserName == null)
                 Console.WriteLine(print);
             else
                 Console.WriteLine(BaseMenuFunctionHW1.UserData.TelegramUserName + ", " + print);
@@ -104,6 +104,24 @@ namespace Otus_homeWork.Help
                 Console.WriteLine();
         }
 
+        static internal int ParseAndValidateInt(string? str, int min, int max) 
+        {
+            int returnInt;
+            ValidateString(str);
+            if (!int.TryParse(str, out returnInt))
+                throw new ArgumentException($"Ошибка ввода параметра (Не число).");
+            
+            if (returnInt < min || returnInt > max)
+                throw new ArgumentException($"Ошибка ввода параметра (Меньше 1 или больше 100).");
+            
+            
+            return returnInt;
+        }
+
+        static internal void ValidateString(string? str) { 
+            if (string.IsNullOrWhiteSpace(str))
+                throw new ArgumentException("Строка пустая или состоит из пробелов");
+        }
     }
 
 }
