@@ -13,12 +13,12 @@ namespace Otus_homeWork.Function
             {
                 if (!string.IsNullOrEmpty(inputData))
                 {
-                    var lengthTaskInput = inputData.Split(' ')[0];
-                    var taskLengthLimittaskLength = HelpFunctions.ParseAndValidateInt(lengthTaskInput, 1, 100);
-                    inputData = inputData.Replace($"{lengthTaskInput} ","");
+                    //var lengthTaskInput = inputData.Split(' ')[0];
+                    //var taskLengthLimittaskLength = HelpFunctions.ParseAndValidateInt(lengthTaskInput, 1, 100);
+                    //inputData = inputData.Replace($"{lengthTaskInput} ","");
 
-                    if (inputData.Length > taskLengthLimittaskLength)
-                        throw new TaskLengthLimitException(inputData.Length, taskLengthLimittaskLength);
+                    if (inputData.Length > Program.TaskLengthLimittaskLength)
+                        throw new TaskLengthLimitException(inputData.Length, Program.TaskLengthLimittaskLength);
 
                     if (Program.TaskList.Count !=0)
                         foreach (var loadedTask in Program.TaskList)
@@ -35,17 +35,17 @@ namespace Otus_homeWork.Function
                 }
                 else
                 {
-                    Console.WriteLine("Введите максимально допустимое длину задачи:");
-                    var tempIn = Console.ReadLine();
-                    var taskLengthLimittaskLength = HelpFunctions.ParseAndValidateInt(tempIn, 1, 100);
+                    //Console.WriteLine("Введите максимально допустимое длину задачи:");
+                    //var tempIn = Console.ReadLine();
+                    //var taskLengthLimittaskLength = HelpFunctions.ParseAndValidateInt(tempIn, 1, 100);
 
                     HelpFunctions.CheckName("Напишите задачу для добавления в список");
                     inputData = Console.ReadLine();
 
                     if (!string.IsNullOrEmpty(inputData))
                     {
-                        if (inputData.Length > taskLengthLimittaskLength)
-                            throw new TaskLengthLimitException(inputData.Length, taskLengthLimittaskLength);
+                        if (inputData.Length > Program.TaskLengthLimittaskLength)
+                            throw new TaskLengthLimitException(inputData.Length, Program.TaskLengthLimittaskLength);
 
                         ToDoItem temp = new(BaseMenuFunctionHW1.UserData, name: inputData);
                         Program.TaskList.Add(temp);

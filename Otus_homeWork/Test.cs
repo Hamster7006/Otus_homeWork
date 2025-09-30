@@ -39,21 +39,24 @@ namespace Otus_homeWork
                     HelpFunctions.Pause("Удаляем 10 задачу и добавляем новую + вывод");
                     Console.ResetColor();
                     AddFunctionsHW2.RemoveTaskList("10");
-                    AddFunctionsHW2.AddTaskList($"40 'Автотест': Задача 10 NEW добавление");
+                    AddFunctionsHW2.AddTaskList($"'Автотест': Задача 10 NEW добавление");
                     AddFunctionsHW2.PrintTaskList(true);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
+                    
                     HelpFunctions.Pause("Удаляем 9 задачу и добавляем новую c ошибкой длины + вывод");
+                    Program.TaskLengthLimittaskLength = 4;
                     Console.ResetColor();
                     AddFunctionsHW2.RemoveTaskList("9");
-                    AddFunctionsHW2.AddTaskList($"4 'Автотест': Задача 10 NEW добавление");
+                    AddFunctionsHW2.AddTaskList($"'Автотест': Задача 10 NEW добавление");
                     AddFunctionsHW2.PrintTaskList(true);
                     break;
                 case 2:
+                    Program.TaskLengthLimittaskLength = 100;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     HelpFunctions.Pause("Добавляем задачу с существующим именем + вывод");
                     Console.ResetColor();
-                    AddFunctionsHW2.AddTaskList($"35 'Автотест': Задача 2 добавление");
+                    AddFunctionsHW2.AddTaskList($"'Автотест': Задача 2 добавление");
                     AddFunctionsHW2.PrintTaskList(true);
                     break;
                 default:
