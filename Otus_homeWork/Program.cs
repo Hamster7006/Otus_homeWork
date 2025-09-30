@@ -8,13 +8,9 @@ namespace Otus_homeWork
     public class Program
     {
         internal static int MaxLengthList = 0;
-        internal static int TaskLengthLimittaskLength = 0;
         internal static List<ToDoItem> TaskList = new List<ToDoItem> (100);
         private static int testCase = 0;
 
-
-
-        
         static void Main()
         {
             var paramStart = 2; // 0 - обычный запуск | 2 - автотесты 
@@ -23,7 +19,7 @@ namespace Otus_homeWork
             {
                 try
                 {
-                    if (MaxLengthList == 0 || TaskLengthLimittaskLength == 0)
+                    if (MaxLengthList == 0)
                         StartApp(paramStart);
                     else
                         StartApp(paramStart+1);
@@ -64,7 +60,6 @@ namespace Otus_homeWork
                     break;
                 case 2:
                     MaxLengthList = 10;
-                    TaskLengthLimittaskLength = 100;
                     Test.TestLoad();
                     break;
                 default:
@@ -81,10 +76,6 @@ namespace Otus_homeWork
             var tempIn = Console.ReadLine();
             MaxLengthList = HelpFunctions.ParseAndValidateInt(tempIn, 1, 100);
             Console.Clear();
-
-            Console.WriteLine("Введите максимально допустимое длину задачи:");
-            tempIn = Console.ReadLine();
-            TaskLengthLimittaskLength = HelpFunctions.ParseAndValidateInt(tempIn, 1, 100);
             LoadMenuSecond();
         }
         internal static void LoadMenuSecond()
