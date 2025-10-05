@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus_homeWork", "Otus_homeWork\Otus_homeWork.csproj", "{3C818CA3-A3BB-423E-86F6-4F46CD571121}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F2432296-956C-CBF6-BC09-CC9BFB47E618} = {F2432296-956C-CBF6-BC09-CC9BFB47E618}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.ToDoList.ConsoleBot", "..\..\..\Documents\GitHub\C-Sharp-Basic\Homeworks\05.2 ООП интерфейсы\Otus.ToDoList.ConsoleBot\Otus.ToDoList.ConsoleBot.csproj", "{F2432296-956C-CBF6-BC09-CC9BFB47E618}"
 EndProject
