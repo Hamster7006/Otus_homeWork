@@ -1,6 +1,6 @@
 ﻿namespace Otus_homeWork.ToDO
 {
-    internal class ToDoUser
+    public class ToDoUser
     {
         public Guid UserId { get; set; }
         public string TelegramUserName { get; set; }

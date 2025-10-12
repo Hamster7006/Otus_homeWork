@@ -8,14 +8,14 @@ namespace Otus_homeWork.Function
 {
     internal class BaseMenuFunctionHW1
     {
-        internal static ToDoUser UserData = new();
+        //internal static ToDoUser UserData = new();
         
 
-        internal static void Start(UserService.UserService user, Update update)
-        {
-            if (user.GetUser(update.Message.From.Id) == null )
-                UserData = user.RegisterUser(update.Message.From.Id, update.Message.From.Username);
-        }
+        //internal static void Start(UserService.UserService user, Update update)
+        //{
+        //    if (user.GetUser(update.Message.From.Id) == null )
+        //        UserData = user.RegisterUser(update.Message.From.Id, update.Message.From.Username);
+        //}
 
         //internal static void Help()
         //{

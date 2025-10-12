@@ -25,10 +25,10 @@ namespace Otus_homeWork.Function
             }
             else if (parm == "all")
             {
-                for (var i = 0; i < Program.TaskList.Count; i++)
+                for (var i = 0; i < UpdateHandler.UpdateHandler.TaskList.Count; i++)
                 {
-                    Program.TaskList[i].State = ToDoItemState.Completed;
-                    Program.TaskList[i].ChangedAt = DateTime.Now;
+                    UpdateHandler.UpdateHandler.TaskList[i].State = ToDoItemState.Completed;
+                    UpdateHandler.UpdateHandler.TaskList[i].ChangedAt = DateTime.Now;
 
                 }
                 str = "Список помечен как выполненый";
@@ -36,18 +36,18 @@ namespace Otus_homeWork.Function
             else
             {
                 var check = false;
-                for (var i = 0; i < Program.TaskList.Count; i++)
+                for (var i = 0; i < UpdateHandler.UpdateHandler.TaskList.Count; i++)
                 {
-                    if (Program.TaskList[i].GuidId.ToString() == parm)
+                    if (UpdateHandler.UpdateHandler.TaskList[i].GuidId.ToString() == parm)
                     {
-                        if (Program.TaskList[i].State != ToDoItemState.Completed)
+                        if (UpdateHandler.UpdateHandler.TaskList[i].State != ToDoItemState.Completed)
                         {
-                            Program.TaskList[i].State = ToDoItemState.Completed;
-                            Program.TaskList[i].ChangedAt = DateTime.Now;
-                            str = $"Задача {Program.TaskList[i].TaskName} помечена выполненной.";
+                            UpdateHandler.UpdateHandler.TaskList[i].State = ToDoItemState.Completed;
+                            UpdateHandler.UpdateHandler.TaskList[i].ChangedAt = DateTime.Now;
+                            str = $"Задача {UpdateHandler.UpdateHandler.TaskList[i].TaskName} помечена выполненной.";
                         }
                         else
-                            str = $"Задача помечена выполненной ранее: {Program.TaskList[i].ChangedAt}";
+                            str = $"Задача помечена выполненной ранее: {UpdateHandler.UpdateHandler.TaskList[i].ChangedAt}";
 
                         check = true;
                     }

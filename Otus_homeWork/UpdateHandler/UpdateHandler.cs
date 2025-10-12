@@ -13,15 +13,33 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-var handler = new UpdateHandler();
-var botClient = new ConsoleBotClient();
-botClient.StartReceiving(handler);
+//var handler = new UpdateHandler();
+//var botClient = new ConsoleBotClient();
+//botClient.StartReceiving(handler);
 
 namespace Otus_homeWork.UpdateHandler
 {
     public class UpdateHandler : IUpdateHandler
     {
-        UserService.UserService User = new ();
+        internal static ToDoUser UserData = new();
+        public static int MaxLengthList = 0;
+        public static List<ToDoItem> TaskList = new List<ToDoItem>(100);
+        //private static int testCase = 0;
+        public static int TaskLengthLimittaskLength = 0;
+
+        public UserService.UserService User = new ();
+        public UpdateHandler(IUserService user, Update update)
+        {
+            
+            //if(User.GetUser(update.Message.From.Id)==null)
+            //    UserData = user.RegisterUser(update.Message.From.Id, update.Message.From.Username);
+            //else
+            //    return UserData;
+
+            //IUserService user = new UserService.UserService();
+            //IUserService.GetUser();
+        }
+
         public void HandleUpdateAsync(ITelegramBotClient botClient, Update update)
         {
             botClient.SendMessage(update.Message.Chat, $"Получил '{update.Message.Text}'");
@@ -31,18 +49,18 @@ namespace Otus_homeWork.UpdateHandler
             {
                 try
                 {
-                    if (Program.MaxLengthList == 0)
+                    if (MaxLengthList == 0)
                     {
                         HelpFunctions.InitCommandsAndHelp();
                         botClient.SendMessage(update.Message.Chat, "Введите максимально допустимое количество задач:");
                         //Console.WriteLine("Введите максимально допустимое количество задач:");
-                        Program.MaxLengthList = HelpFunctions.ParseAndValidateInt(Console.ReadLine(), 1, 100);
+                        MaxLengthList = HelpFunctions.ParseAndValidateInt(Console.ReadLine(), 1, 100);
                         //Console.Clear();
                     }
-                    if (Program.TaskLengthLimittaskLength == 0)
+                    if (TaskLengthLimittaskLength == 0)
                     {
                         botClient.SendMessage(update.Message.Chat, "Введите максимально допустимое длину задачи:");
-                        Program.TaskLengthLimittaskLength = HelpFunctions.ParseAndValidateInt(Console.ReadLine(), 1, 100);
+                        TaskLengthLimittaskLength = HelpFunctions.ParseAndValidateInt(Console.ReadLine(), 1, 100);
                         //Console.Clear();
                     }
 
@@ -56,7 +74,8 @@ namespace Otus_homeWork.UpdateHandler
                     {
                         // HW 1
                         case "/start":
-                            BaseMenuFunctionHW1.Start(User, update);
+                            //BaseMenuFunctionHW1.Start(User, update);
+                            //IUpdateHandler(User, update);
                             break;
                         case "/help":
                             //BaseMenuFunctionHW1.Help();

@@ -5,22 +5,21 @@ using Otus_homeWork.CustomExept;
 using Otus_homeWork.Function;
 using Otus_homeWork.Help;
 using Otus_homeWork.ToDO;
+using Otus_homeWork.UpdateHandler;
+using Otus_homeWork.UserService;
 
-
+var handler = new UpdateHandler();
+var botClient = new ConsoleBotClient();
+botClient.StartReceiving(handler);
 
 namespace Otus_homeWork
 {
     public class Program
     {
-        internal static int MaxLengthList = 0;
-        internal static List<ToDoItem> TaskList = new List<ToDoItem> (100);
-        //private static int testCase = 0;
-        internal static int TaskLengthLimittaskLength = 0;
-
-        
-
         static void Main(Update update, ConsoleBotClient botClient)
+        //static void Main()
         {
+
             var handler2 = new UpdateHandler.UpdateHandler();
             var checkStopApp = false;
             do

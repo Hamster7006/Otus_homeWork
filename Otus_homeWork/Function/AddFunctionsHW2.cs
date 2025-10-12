@@ -10,7 +10,7 @@ namespace Otus_homeWork.Function
         internal static string AddTaskList(string? inputData = null)
         {
             var str = "";
-            if (Program.TaskList.Count + 1 <= Program.MaxLengthList)
+            if (UpdateHandler.UpdateHandler.TaskList.Count + 1 <= UpdateHandler.UpdateHandler.MaxLengthList)
             {
                 if (!string.IsNullOrEmpty(inputData))
                 {
@@ -18,12 +18,12 @@ namespace Otus_homeWork.Function
                     //var taskLengthLimittaskLength = HelpFunctions.ParseAndValidateInt(lengthTaskInput, 1, 100);
                     //inputData = inputData.Replace($"{lengthTaskInput} ","");
 
-                    if (inputData.Length > Program.TaskLengthLimittaskLength)
+                    if (inputData.Length > UpdateHandler.UpdateHandler.TaskLengthLimittaskLength)
                         //throw new TaskLengthLimitException(inputData.Length, Program.TaskLengthLimittaskLength);
-                        throw new CustomException($"Длина задачи '{inputData.Length}' превышает максимально допустимое значение {Program.TaskLengthLimittaskLength}");
+                        throw new CustomException($"Длина задачи '{inputData.Length}' превышает максимально допустимое значение {UpdateHandler.UpdateHandler.TaskLengthLimittaskLength}");
 
-                    if (Program.TaskList.Count != 0)
-                        foreach (var loadedTask in Program.TaskList)
+                    if (UpdateHandler.UpdateHandler.TaskList.Count != 0)
+                        foreach (var loadedTask in UpdateHandler.UpdateHandler.TaskList)
                         {
                             if (loadedTask.TaskName == inputData)
                                 //throw new DuplicateTaskException(inputData);
@@ -33,7 +33,7 @@ namespace Otus_homeWork.Function
                     var temp = new ToDoItem(BaseMenuFunctionHW1.UserData, inputData);
 
 
-                    Program.TaskList.Add(temp);
+                    UpdateHandler.UpdateHandler.TaskList.Add(temp);
                     str = HelpFunctions.CheckName($"Задача '{inputData}' успешно добавлена");
                 }
                 else
@@ -45,7 +45,7 @@ namespace Otus_homeWork.Function
             }
             else
                 //throw new TaskCountLimitException(Program.MaxLengthList);
-                throw new CustomException($"Превышено максимальное количество задач равное {Program.MaxLengthList}");
+                throw new CustomException($"Превышено максимальное количество задач равное {UpdateHandler.UpdateHandler.MaxLengthList}");
         }
 
         //internal static void RemoveTaskList(string? inputParam = null, bool checkPrintPause = true)
@@ -59,7 +59,7 @@ namespace Otus_homeWork.Function
             }
             else if (inputParam == "all")
             {
-                Program.TaskList.RemoveRange(0, Program.TaskList.Count);
+                UpdateHandler.UpdateHandler.TaskList.RemoveRange(0, UpdateHandler.UpdateHandler.TaskList.Count);
                 strToReturn = "Список очищен";
             }
             else if (inputParam.Contains(','))
@@ -77,7 +77,7 @@ namespace Otus_homeWork.Function
 
                 foreach (var ind in indArr)
                 {
-                    if (int.TryParse(ind, out var res) && res >= 1 && res - changeInd <= Program.TaskList.Count)
+                    if (int.TryParse(ind, out var res) && res >= 1 && res - changeInd <= UpdateHandler.UpdateHandler.TaskList.Count)
                     {
                         //RemoveTaskList($"{res - changeInd}", false);
                         strToReturn = $"{strToReturn}\r\n{RemoveTaskList($"{res - changeInd}")}";
@@ -85,10 +85,10 @@ namespace Otus_homeWork.Function
                     }
                 }
             }
-            else if (int.TryParse(inputParam, out var res) && res >= 1 && res <= Program.TaskList.Count)
+            else if (int.TryParse(inputParam, out var res) && res >= 1 && res <= UpdateHandler.UpdateHandler.TaskList.Count)
             {
-                var tempTask = Program.TaskList[res - 1];
-                Program.TaskList.RemoveAt(res - 1);
+                var tempTask = UpdateHandler.UpdateHandler.TaskList[res - 1];
+                UpdateHandler.UpdateHandler.TaskList.RemoveAt(res - 1);
                 strToReturn = $"Задача '{tempTask.TaskName}' удалена";
             }
             else
@@ -108,7 +108,7 @@ namespace Otus_homeWork.Function
             var leng = 8;
             var stringToReturn = "";
 
-            if (Program.TaskList.Count == 0)
+            if (UpdateHandler.UpdateHandler.TaskList.Count == 0)
                 //Console.WriteLine("Список пуст");
                 stringToReturn = HelpFunctions.CheckName("Список пуст");
             else
@@ -116,7 +116,7 @@ namespace Otus_homeWork.Function
                 var chStateActive = false;
                 if (!allPrint)
                 {
-                    foreach (var task in Program.TaskList)
+                    foreach (var task in UpdateHandler.UpdateHandler.TaskList)
                     {
                         if (task.State == ToDoItemState.Active)
                             chStateActive = true;
@@ -127,7 +127,7 @@ namespace Otus_homeWork.Function
                     stringToReturn = HelpFunctions.CheckName("Активных задач не обнаружено");
                 else
                 {
-                    foreach (var task in Program.TaskList)
+                    foreach (var task in UpdateHandler.UpdateHandler.TaskList)
                     {
                         if (leng < task.TaskName.Length)
                             leng = task.TaskName.Length;
@@ -156,28 +156,28 @@ namespace Otus_homeWork.Function
                         stringToReturn = $"{stringToReturn}{HelpFunctions.PrintBorder('─', [6, 37, 20, leng], '┼', '┤')}";
 
                     bool printBorder;
-                    for (int i = 0; i < Program.TaskList.Count; i++)
+                    for (int i = 0; i < UpdateHandler.UpdateHandler.TaskList.Count; i++)
                     {
                         printBorder = true;
                         if (allPrint)
                         {
-                            stringToReturn = $"{stringToReturn}{$"| {index++,5} | {Program.TaskList[i].GuidId,36} "+
-                                    $"| {Program.TaskList[i].CreateAT.ToString(),19} | {Program.TaskList[i].State,9} | {Program.TaskList[i].TaskName}"
+                            stringToReturn = $"{stringToReturn}{$"| {index++,5} | {UpdateHandler.UpdateHandler.TaskList[i].GuidId,36} "+
+                                    $"| {UpdateHandler.UpdateHandler.TaskList[i].CreateAT.ToString(),19} | {UpdateHandler.UpdateHandler.TaskList[i].State,9} | {UpdateHandler.UpdateHandler.TaskList[i].TaskName}"
                                 }";
-                            stringToReturn = $"{stringToReturn}{HelpFunctions.PrintFrame(' ', leng - Program.TaskList[i].TaskName.Length - 1, '|', true)}";
+                            stringToReturn = $"{stringToReturn}{HelpFunctions.PrintFrame(' ', leng - UpdateHandler.UpdateHandler.TaskList[i].TaskName.Length - 1, '|', true)}";
                         }
-                        else if (Program.TaskList[i].State == ToDoItemState.Active)
+                        else if (UpdateHandler.UpdateHandler.TaskList[i].State == ToDoItemState.Active)
                         {
-                            stringToReturn = $"{stringToReturn}{($"| {index++,5} | {Program.TaskList[i].GuidId,36} | {Program.TaskList[i].CreateAT.ToString(),19} "+
-                                    $"| {Program.TaskList[i].TaskName}"
+                            stringToReturn = $"{stringToReturn}{($"| {index++,5} | {UpdateHandler.UpdateHandler.TaskList[i].GuidId,36} | {UpdateHandler.UpdateHandler.TaskList[i].CreateAT.ToString(),19} "+
+                                    $"| {UpdateHandler.UpdateHandler.TaskList[i].TaskName}"
                                 )}";
-                            stringToReturn = $"{stringToReturn}{HelpFunctions.PrintFrame(' ', leng - Program.TaskList[i].TaskName.Length - 1, '|', true)}";
+                            stringToReturn = $"{stringToReturn}{HelpFunctions.PrintFrame(' ', leng - UpdateHandler.UpdateHandler.TaskList[i].TaskName.Length - 1, '|', true)}";
                         }
                         else
                             printBorder = false;
 
                         if (printBorder)
-                            if (i == Program.TaskList.Count - 1)
+                            if (i == UpdateHandler.UpdateHandler.TaskList.Count - 1)
                             {
                                 stringToReturn = $"{stringToReturn}└";
                                 if (allPrint)
