@@ -8,24 +8,18 @@ namespace Otus_homeWork.Function
 {
     internal class AddFunctionsHW3
     {
-        //public static void Completetask(string? parm = null, bool ch = true)
         public static void Completetask(Chat chat, ITelegramBotClient telegramBotClient, Guid Userid, ToDoService toDoService, string? parm = null)
         {
             var str = "";
             if (parm == null)
             {
-                //Console.Clear();
-                //AddFunctionsHW2.PrintTaskList(true, false);
                 str = toDoService.PrintList(Userid, false);
-                //str = AddFunctionsHW2.PrintTaskList(true);
                 str = $"{str}{HelpFunctions.CheckName("Введите ID задачи для выполнения! Для выполнения всего списка введите 'all'")}";
                 telegramBotClient.SendMessage(chat, str);
                 var index = Console.ReadLine();
                 if (index == "all")
-                    //Completetask("all", false);
                     Completetask(chat, telegramBotClient, Userid, toDoService, "all");
                 else
-                    //Completetask(index, false);
                     Completetask(chat, telegramBotClient, Userid, toDoService, index);
             }
             else if (parm == "all")
@@ -48,8 +42,6 @@ namespace Otus_homeWork.Function
                     telegramBotClient.SendMessage(chat, $"Задача c ID {parm} не найдена");
                 }
             }
-            //if (ch)
-            //    HelpFunctions.Pause();
         }
     }
 }

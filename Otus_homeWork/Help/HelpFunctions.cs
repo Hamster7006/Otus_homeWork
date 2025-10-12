@@ -6,15 +6,6 @@ namespace Otus_homeWork.Help
 {
     internal static class HelpFunctions
     {
-        //internal static void Pause(string input = null)
-        //{
-        //    //if (input != null)
-        //    //    Console.WriteLine(input);
-        //    //Console.WriteLine("\n\r \n\rДля продолжения нажмите любую клавишу");
-        //    //Console.ReadKey();
-        //    //Console.Clear();
-        //}
-
         internal static string CheckName(string print)
         {
             if (string.IsNullOrEmpty(UpdateHandler.UserData.TelegramUserName))
@@ -23,7 +14,6 @@ namespace Otus_homeWork.Help
                 return $"{UpdateHandler.UserData.TelegramUserName}, {print}";
         }
 
-        //internal static string PrintAvaliableCommandsOrHelp(int j, bool ln)
         internal static string PrintAvaliableCommandsOrHelp(int j)
         {
             string ret = "";
@@ -51,29 +41,6 @@ namespace Otus_homeWork.Help
                 ret = ret.Substring(2);
                 
             return ret ;
-
-
-
-            //    if (VariableData.AvalibleComands[i, 0] == "/echo")
-            //    {
-            //        if (BaseMenuFunctionHW1.UserData.TelegramUserName != null)
-            //            Console.Write(VariableData.AvalibleComands[i, j]);
-            //        else
-            //            ch = false;
-            //    }
-            //    else
-            //        Console.Write(VariableData.AvalibleComands[i, j]);
-
-            //    if (ch && i < VariableData.Length - 1)
-            //    {
-            //        if (ln)
-            //            Console.WriteLine();
-            //        else
-            //            Console.Write(", ");
-            //    }
-            //}
-            //Console.WriteLine();
-            //return "";
         }
 
         internal static void InitCommandsAndHelp()
@@ -106,8 +73,6 @@ namespace Otus_homeWork.Help
 
         }
 
-        //static internal void PrintBorder(
-        //char start, int[] lenArr, char mid, char end, bool wl = false
         static internal string PrintBorder(
             char start, int[] lenArr, char mid, char end
         )
@@ -122,19 +87,15 @@ namespace Otus_homeWork.Help
             }
             return str;
         }
-        //static internal void PrintFrame(char start, int len, char end, bool wl = false)
         static internal string PrintFrame(char start, int len, char end, bool wl = false)
         {
             var str = "";
             for (int i = 0; i <= len; i++)
             {
-                //Console.Write(start);
                 str = $"{str}{start}";
             }
-            //Console.Write(end);
             str = $"{str}{end}";
             if (wl)
-                //Console.WriteLine();
                 str = $"{str}\r\n";
 
             return str ;

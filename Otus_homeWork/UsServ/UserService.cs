@@ -24,14 +24,5 @@ namespace Otus_homeWork.UsServ
             else
                 return null;
         }
-
-        //public UserService(Update update)
-        //{
-        //    //Update.Message.From
-        //    ToDoUser toDoUser = GetUser(telegramUserId: update.Message.From.Id);
-        //    if (toDoUser == null) {
-        //        RegisterUser(update.Message.From.Id, update.Message.From.Username);
-        //    }
-        //}
     }
 }

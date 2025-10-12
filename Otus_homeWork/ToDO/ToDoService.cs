@@ -75,7 +75,6 @@ namespace Otus_homeWork.ToDO
                     {
                         UpdateHandler.TaskList[i].State = ToDoItemState.Completed;
                         UpdateHandler.TaskList[i].ChangedAt = DateTime.Now;
-                        //str = $"Задача {UpdateHandler.TaskList[i].TaskName} помечена выполненной.";
                     }
                     else
                         throw new CustomException($"Задача помечена выполненной ранее: {UpdateHandler.TaskList[i].ChangedAt}");
@@ -102,7 +101,6 @@ namespace Otus_homeWork.ToDO
                     return PrintList2(GetAllByUserId(id), allPrint);
             else
                 if (GetActiveByUserId(id).Count == 0)
-                    //Console.WriteLine("Список пуст");
                     return HelpFunctions.CheckName("Список пуст");
                 else
                     return PrintList2(GetActiveByUserId(id), allPrint) ;
