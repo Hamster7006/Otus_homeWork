@@ -5,28 +5,22 @@ using Otus_homeWork.CustomExept;
 using Otus_homeWork.Function;
 using Otus_homeWork.Help;
 using Otus_homeWork.ToDO;
-using Otus_homeWork.UpdateHandler;
-using Otus_homeWork.UserService;
-
-var handler = new UpdateHandler();
-var botClient = new ConsoleBotClient();
-botClient.StartReceiving(handler);
+using Otus_homeWork.UpdHan;
+using Otus_homeWork.UsServ;
 
 namespace Otus_homeWork
 {
     public class Program
     {
         static void Main(Update update, ConsoleBotClient botClient)
-        //static void Main()
+        //static void Main(Update update)
         {
-
-            var handler2 = new UpdateHandler.UpdateHandler();
-            var checkStopApp = false;
+            //var checkStopApp = false;
             do
             {
                 try
                 {
-                    handler2.HandleUpdateAsync(botClient, update);
+                    new UpdateHandler().HandleUpdateAsync(botClient, update);
                 }
                 //catch (TaskCountLimitException ex)
                 //{
@@ -48,14 +42,15 @@ namespace Otus_homeWork
                 {
                     //WriteConExept.WriteConsoleExeption(ex, true);
                     botClient.SendMessage(update.Message.Chat, $"Ошибка: \r\n Type: {ex.GetType()} \r\n Message: {ex.Message} \r\n StackTrace: {ex.StackTrace} \r\n InnerException: {ex.InnerException} \r\n");
-                }                
+                }
                 //Console.Clear();
-            } while (!checkStopApp);
+            //} while (!checkStopApp);
+            } while (true);
         }
 
         //internal static void StartApp()
         //{
-            
-        //}
+
+            //}
     }
 }

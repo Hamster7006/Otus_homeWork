@@ -1,4 +1,6 @@
-﻿using Otus_homeWork.Function;
+﻿using Otus.ToDoList.ConsoleBot;
+using Otus_homeWork.Function;
+using Otus_homeWork.UpdHan;
 
 namespace Otus_homeWork.Help
 {
@@ -13,34 +15,36 @@ namespace Otus_homeWork.Help
         //    //Console.Clear();
         //}
 
-        internal static string CheckName(string? print = null)
+        internal static string CheckName(string print)
         {
-            if (BaseMenuFunctionHW1.UserData.TelegramUserName == null)
+            if (string.IsNullOrEmpty(UpdateHandler.UserData.TelegramUserName))
                 return print;
             else
-                return $"{BaseMenuFunctionHW1.UserData.TelegramUserName}, {print}";
+                return $"{UpdateHandler.UserData.TelegramUserName}, {print}";
         }
 
         //internal static string PrintAvaliableCommandsOrHelp(int j, bool ln)
         internal static string PrintAvaliableCommandsOrHelp(int j)
         {
-            //bool ch;
             string ret = "";
             var acsessCommands = new List<string> ();
-            acsessCommands = ["/info", "/help"];
-
+            acsessCommands = ["/start", "/info", "/help"];
+            string temp = "";
             for (int i = 0; i < VariableData.Length; i++)
             {
-                //ch = true;
-                if (j == 0 && BaseMenuFunctionHW1.UserData.TelegramUserName == null)
-                {
-                    if (acsessCommands.Contains(VariableData.AvalibleComands[i, j]))
-                        ret = $"{ret}, {VariableData.AvalibleComands[i, j]}";
-                }
-                else if (j == 0)
-                    ret = $"{ret}, {VariableData.AvalibleComands[i, j]}";
+                if (j == 0)
+                     temp = ", ";
                 else
-                    ret = $"{ret}\r\n{VariableData.AvalibleComands[i, j]}";
+                    temp = "\r\n";
+                ;
+                if (
+                    string.IsNullOrEmpty(UpdateHandler.UserData.TelegramUserName)
+                ){
+                    if (acsessCommands.Contains(VariableData.AvalibleComands[i, 0]))
+                        ret = $"{ret}{temp}{VariableData.AvalibleComands[i, j]}";
+                } 
+                else
+                    ret = $"{ret}{temp}{VariableData.AvalibleComands[i, j]}";
             }
 
             if(ret.StartsWith(','))

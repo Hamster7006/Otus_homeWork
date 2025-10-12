@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Otus_homeWork.UserService
+namespace Otus_homeWork.UsServ
 {
     interface IUserService
     {

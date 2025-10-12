@@ -1,15 +1,16 @@
 ﻿using Otus.ToDoList.ConsoleBot.Types;
 using Otus_homeWork.Function;
 using Otus_homeWork.ToDO;
+using Otus_homeWork.UpdHan;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Otus_homeWork.UserService
+namespace Otus_homeWork.UsServ
 {
-    internal class UserService : IUserService
+    public class UserService : IUserService
     {
         public ToDoUser RegisterUser(long telegramUserId, string telegramUserName)
         {
@@ -18,8 +19,8 @@ namespace Otus_homeWork.UserService
         }
         public ToDoUser? GetUser(long telegramUserId)
         {
-            if (BaseMenuFunctionHW1.UserData.TelegramUserId == telegramUserId)
-                return BaseMenuFunctionHW1.UserData;
+            if (UpdateHandler.UserData.TelegramUserId == telegramUserId)
+                return UpdateHandler.UserData;
             else
                 return null;
         }

@@ -1,15 +1,16 @@
 ﻿
+using Otus.ToDoList.ConsoleBot;
 using Otus.ToDoList.ConsoleBot.Types;
 using Otus_homeWork.Help;
 using Otus_homeWork.ToDO;
-using Otus_homeWork.UserService;
+using Otus_homeWork.UpdHan;
 
 namespace Otus_homeWork.Function
 {
     internal class BaseMenuFunctionHW1
     {
         //internal static ToDoUser UserData = new();
-        
+
 
         //internal static void Start(UserService.UserService user, Update update)
         //{
@@ -29,9 +30,9 @@ namespace Otus_homeWork.Function
         //    Console.WriteLine(stringInput);
         //    //HelpFunctions.Pause();
         //}
-        internal static string Info()
+        internal static void Info(Chat chat, ITelegramBotClient telegramBotClient)
         {
-            return $"Версия программы: {VariableData.VersionBot} \r\n Дата релиза программы: {VariableData.DateRelise}";
+            telegramBotClient.SendMessage(chat, $"Версия программы: {VariableData.VersionBot} \r\nДата релиза программы: {VariableData.DateRelise}");
         }
 
 
