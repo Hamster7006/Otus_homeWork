@@ -1,52 +1,46 @@
-﻿using Otus_homeWork.Function;
+﻿using Otus.ToDoList.ConsoleBot;
+using Otus_homeWork.Function;
+using Otus_homeWork.UpdHan;
 
 namespace Otus_homeWork.Help
 {
     internal static class HelpFunctions
     {
-        internal static void Pause(string input = null)
+        internal static string CheckName(string print)
         {
-            if (input != null)
-                Console.WriteLine(input);
-            Console.WriteLine("\n\r \n\rДля продолжения нажмите любую клавишу");
-            Console.ReadKey();
-            Console.Clear();
-        }
-
-        internal static void CheckName(string? print = null)
-        {
-            if (BaseMenuFunctionHW1.UserData.TelegramUserName == null)
-                Console.WriteLine(print);
+            if (string.IsNullOrEmpty(UpdateHandler.UserData.TelegramUserName))
+                return print;
             else
-                Console.WriteLine(BaseMenuFunctionHW1.UserData.TelegramUserName + ", " + print);
+                return $"{UpdateHandler.UserData.TelegramUserName}, {print}";
         }
 
-        internal static void PrintAvaliableCommandsOrHelp(int j, bool ln)
+        internal static string PrintAvaliableCommandsOrHelp(int j)
         {
-            bool ch;
-
+            string ret = "";
+            var acsessCommands = new List<string> ();
+            acsessCommands = ["/start", "/info", "/help"];
+            string temp = "";
             for (int i = 0; i < VariableData.Length; i++)
             {
-                ch = true;
-                if (VariableData.AvalibleComands[i, 0] == "/echo")
-                {
-                    if (BaseMenuFunctionHW1.UserData.TelegramUserName != null)
-                        Console.Write(VariableData.AvalibleComands[i, j]);
-                    else
-                        ch = false;
-                }
+                if (j == 0)
+                     temp = ", ";
                 else
-                    Console.Write(VariableData.AvalibleComands[i, j]);
-
-                if (ch && i < VariableData.Length - 1)
-                {
-                    if (ln)
-                        Console.WriteLine();
-                    else
-                        Console.Write(", ");
-                }
+                    temp = "\r\n";
+                ;
+                if (
+                    string.IsNullOrEmpty(UpdateHandler.UserData.TelegramUserName)
+                ){
+                    if (acsessCommands.Contains(VariableData.AvalibleComands[i, 0]))
+                        ret = $"{ret}{temp}{VariableData.AvalibleComands[i, j]}";
+                } 
+                else
+                    ret = $"{ret}{temp}{VariableData.AvalibleComands[i, j]}";
             }
-            Console.WriteLine();
+
+            if(ret.StartsWith(','))
+                ret = ret.Substring(2);
+                
+            return ret ;
         }
 
         internal static void InitCommandsAndHelp()
@@ -57,53 +51,54 @@ namespace Otus_homeWork.Help
             VariableData.AvalibleComands[1, 1] = "Команда /help информация по командам (этот текст)";
             VariableData.AvalibleComands[2, 0] = "/info";
             VariableData.AvalibleComands[2, 1] = "Команда /info версия программы и дата релиза";
-            VariableData.AvalibleComands[3, 0] = "/echo";
-            VariableData.AvalibleComands[3, 1] = "Команда /echo <String>  режим ЭХО. Выводи в консоль <string>. Параметр <string> обязаителен для ввода.";
-            VariableData.AvalibleComands[4, 0] = "/exit";
-            VariableData.AvalibleComands[4, 1] = "Команда /exit выход из программы";
-            VariableData.AvalibleComands[5, 0] = "/addtask";
-            VariableData.AvalibleComands[5, 1] = "Команда '/addtask <int> <string>' добавить задачу в список. \n\r" +
-                "     /addtask - Команда без параметра запросит ввод максимальной длины и наименование задачи для добавления \n\r" +
-                "     /addtask <int> <string> - Команда с параметрами (число - максимальная длина имени) (строка - наименование задачи) добавит задачу в список.";
-            VariableData.AvalibleComands[6, 0] = "/showtasks";
-            VariableData.AvalibleComands[6, 1] = "Команда /showtasks Вывести список актуальных (не выполненных) задач";
-            VariableData.AvalibleComands[7, 0] = "/showalltasks";
-            VariableData.AvalibleComands[7, 1] = "Команда /showalltasks Вывести список всех задач";
-            VariableData.AvalibleComands[8, 0] = "/removetask";
-            VariableData.AvalibleComands[8, 1] = "Команда /removetask <int> удалить задачу из списка. \n\r" +
-                "     Команда без параметра выведет список доступных задач для выбора номера и запросит указание номера задачи для удаления. \n\r" +
+            VariableData.AvalibleComands[3, 0] = "/exit";
+            VariableData.AvalibleComands[3, 1] = "Команда /exit выход из программы";
+            VariableData.AvalibleComands[4, 0] = "/addtask";
+            VariableData.AvalibleComands[4, 1] = "Команда '/addtask <string>' добавить задачу в список. \n\r" +
+                "     /addtask <string> - Команда с параметром (строка - наименование задачи) добавит задачу в список.";
+            VariableData.AvalibleComands[5, 0] = "/showtasks";
+            VariableData.AvalibleComands[5, 1] = "Команда /showtasks Вывести список актуальных (не выполненных) задач";
+            VariableData.AvalibleComands[6, 0] = "/showalltasks";
+            VariableData.AvalibleComands[6, 1] = "Команда /showalltasks Вывести список всех задач";
+            VariableData.AvalibleComands[7, 0] = "/removetask";
+            VariableData.AvalibleComands[7, 1] = "Команда /removetask <int> удалить задачу из списка. \n\r" +
                 "     Команда с параметром 'число' удалит задачу под указанным номером, если она существует \n\r" +
                 "     Команда с параметром 'число1,число2..' удалит задачи под указанными номерами, если они существует. Разделитель ',' \n\r" +
                 "     Параметр 'all' удалит весь список";
-            VariableData.AvalibleComands[9, 0] = "/completetask";
-            VariableData.AvalibleComands[9, 1] = "Команда /completetask [#] пометить задачу выполненной из списка. \n\r" +
+            VariableData.AvalibleComands[8, 0] = "/completetask";
+            VariableData.AvalibleComands[8, 1] = "Команда /completetask [#] пометить задачу выполненной из списка. \n\r" +
                 "     Команда без параметра выведет список доступных задач для выбора ID и запросит указание ID задачи для выполненния. \n\r" +
                 "     Команда с параметром 'ID' пометит задачу под указанным ID ка выполненную, если она существует \n\r" +
                 "     Параметр 'all' пометит выполненным весь список";
 
         }
 
-        static internal void PrintBorder(
-                char start, int[] lenArr, char mid, char end, bool wl = false
+        static internal string PrintBorder(
+            char start, int[] lenArr, char mid, char end
         )
         {
+            var str = "";
             for (int i = 0; i < lenArr.Length; i++)
             {
                 if (i != lenArr.Length - 1)
-                    PrintFrame(start, lenArr[i], mid);
+                    str = $"{str}{PrintFrame(start, lenArr[i], mid)}";
                 else
-                    PrintFrame(start, lenArr[i], end, true);
+                    str = $"{str}{PrintFrame(start, lenArr[i], end, true)}";
             }
+            return str;
         }
-        static internal void PrintFrame(char start, int len, char end, bool wl = false)
+        static internal string PrintFrame(char start, int len, char end, bool wl = false)
         {
+            var str = "";
             for (int i = 0; i <= len; i++)
             {
-                Console.Write(start);
+                str = $"{str}{start}";
             }
-            Console.Write(end);
+            str = $"{str}{end}";
             if (wl)
-                Console.WriteLine();
+                str = $"{str}\r\n";
+
+            return str ;
         }
 
         static internal int ParseAndValidateInt(string? str, int min, int max) 

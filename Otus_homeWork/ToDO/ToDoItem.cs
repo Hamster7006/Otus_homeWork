@@ -1,12 +1,12 @@
 ﻿namespace Otus_homeWork.ToDO
 {
-    internal enum ToDoItemState
+    public enum ToDoItemState
     {
         Active,
         Completed
     };
 
-    internal class ToDoItem
+    public class ToDoItem
     {
         public Guid GuidId { get; set; }
         public DateTime CreateAT { get; set; }
