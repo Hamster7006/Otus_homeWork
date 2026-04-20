@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Otus_homeWork.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Otus_homeWork.ToDO
+namespace Otus_homeWork.Core.DataAccess
 {
     public interface IToDoService
     {

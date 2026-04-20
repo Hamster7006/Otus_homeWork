@@ -1,14 +1,13 @@
 ﻿using Otus.ToDoList.ConsoleBot.Types;
-using Otus_homeWork.Function;
-using Otus_homeWork.ToDO;
-using Otus_homeWork.UpdHan;
+using Otus_homeWork.Core.Entities;
+using Otus_homeWork.TelegramBot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Otus_homeWork.UsServ
+namespace Otus_homeWork.Core.Services
 {
     public class UserService : IUserService
     {

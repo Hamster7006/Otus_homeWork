@@ -1,11 +1,11 @@
-﻿using Otus_homeWork.ToDO;
+﻿using Otus_homeWork.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Otus_homeWork.UsServ
+namespace Otus_homeWork.Core.Services
 {
     interface IUserService
     {

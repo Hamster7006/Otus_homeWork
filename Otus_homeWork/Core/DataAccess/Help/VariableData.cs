@@ -1,4 +1,4 @@
-﻿namespace Otus_homeWork.Help
+﻿namespace Otus_homeWork.Core.DataAccess.Help
 {
     public static class VariableData
     {
@@ -16,7 +16,7 @@
         {
             get
             {
-                return "1.5.0";
+                return "1.5.5";
             }
         }
 

@@ -1,12 +1,7 @@
 ﻿using Otus.ToDoList.ConsoleBot;
 using Otus.ToDoList.ConsoleBot.Types;
 using Otus_homeWork;
-using Otus_homeWork.CustomExept;
-using Otus_homeWork.Function;
-using Otus_homeWork.Help;
-using Otus_homeWork.ToDO;
-using Otus_homeWork.UpdHan;
-using Otus_homeWork.UsServ;
+using Otus_homeWork.TelegramBot;
 
 namespace Otus_homeWork
 {
@@ -14,6 +9,9 @@ namespace Otus_homeWork
     {
         static void Main(Update update, ConsoleBotClient botClient)
         {
+            var handler = new UpdateHandler();
+            var botClient2 = new ConsoleBotClient();
+            botClient2.StartReceiving(handler);
             do
             {
                 try

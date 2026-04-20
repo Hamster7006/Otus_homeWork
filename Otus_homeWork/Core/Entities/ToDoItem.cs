@@ -1,4 +1,4 @@
-﻿namespace Otus_homeWork.ToDO
+﻿namespace Otus_homeWork.Core.Entities
 {
     public enum ToDoItemState
     {

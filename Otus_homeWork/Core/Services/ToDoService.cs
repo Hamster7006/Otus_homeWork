@@ -1,7 +1,8 @@
-﻿using Otus_homeWork.CustomExept;
-using Otus_homeWork.Function;
-using Otus_homeWork.Help;
-using Otus_homeWork.UpdHan;
+﻿using Otus_homeWork.Core.DataAccess;
+using Otus_homeWork.Core.DataAccess.Help;
+using Otus_homeWork.Core.Entities;
+using Otus_homeWork.Core.Exceptions;
+using Otus_homeWork.TelegramBot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Otus_homeWork.ToDO
+namespace Otus_homeWork.Core.Services
 {
     public class ToDoService : IToDoService
     {
@@ -119,54 +120,19 @@ namespace Otus_homeWork.ToDO
             }
 
             stringToReturn = HelpFunctions.CheckName("Вот список задач \r\n");
-            stringToReturn = $"{stringToReturn}┌";
-
 
             if (allPrint)
-            {
-                stringToReturn = $"{stringToReturn}{HelpFunctions.PrintBorder('─', [6, 37, 20, 10, leng], '┬', '┐')}";
-                stringToReturn = $"{stringToReturn}{$"| Номер | {"ID",36} | {"Создана",19} | Состояние | Задача"}";
-                stringToReturn = $"{stringToReturn}{HelpFunctions.PrintFrame(' ', leng - 7, '|', true)}";
-                stringToReturn = $"{stringToReturn}├";
-                stringToReturn = $"{stringToReturn}{HelpFunctions.PrintBorder('─', [6, 37, 20, 10, leng], '┼', '┤')}";
-            }
+                stringToReturn = $"{stringToReturn}{$"| Номер | {"ID",36} | {"Создана",19} | Состояние | Задача"}\r\n";
             else
-            {
-                stringToReturn = $"{stringToReturn}{HelpFunctions.PrintBorder('─', [6, 37, 20, leng], '┬', '┐')}";
-                stringToReturn = $"{stringToReturn}{$"| Номер | {"Создана",36} | {"ID",19} | Задача"}";
-                stringToReturn = $"{stringToReturn}{HelpFunctions.PrintFrame(' ', leng - 7, '|', true)}";
-                stringToReturn = $"{stringToReturn}├";
-                stringToReturn = $"{stringToReturn}{HelpFunctions.PrintBorder('─', [6, 37, 20, leng], '┼', '┤')}";
-            }
+                stringToReturn = $"{stringToReturn}{$"| Номер | {"Создана",36} | {"ID",19} | Задача"}\r\n";
+
 
             foreach (var task in list)
             {
                 if (allPrint)
-                {
-                    stringToReturn = $"{stringToReturn}{$"| {index++,5} | {task.GuidId,36} | {task.CreateAT.ToString(),19} | {task.State,9} | {task.TaskName}"}";
-                    stringToReturn = $"{stringToReturn}{HelpFunctions.PrintFrame(' ', leng - task.TaskName.Length - 1, '|', true)}";
-                }
+                    stringToReturn = $"{stringToReturn}{$"| {index++,5} | {task.GuidId,36} | {task.CreateAT.ToString(),19} | {task.State,9} | {task.TaskName}"}\r\n";
                 else
-                {
-                    stringToReturn = $"{stringToReturn}{$"| {index++,5} | {task.GuidId,36} | {task.CreateAT.ToString(),19} | {task.TaskName}"}";
-                    stringToReturn = $"{stringToReturn}{HelpFunctions.PrintFrame(' ', leng - task.TaskName.Length - 1, '|', true)}";
-                }
-                if (task == list[^1])
-                {
-                    stringToReturn = $"{stringToReturn}└";
-                    if (allPrint)
-                        stringToReturn = $"{stringToReturn}{HelpFunctions.PrintBorder('─', [6, 37, 20, 10, leng], '┴', '┘')}";
-                    else
-                        stringToReturn = $"{stringToReturn}{HelpFunctions.PrintBorder('─', [6, 37, 20, leng], '┴', '┘')}";
-                }
-                else
-                {
-                    stringToReturn = $"{stringToReturn}├";
-                    if (allPrint)
-                        stringToReturn = $"{stringToReturn}{HelpFunctions.PrintBorder('─', [6, 37, 20, 10, leng], '┼', '┤')}";
-                    else
-                        stringToReturn = $"{stringToReturn}{HelpFunctions.PrintBorder('─', [6, 37, 20, leng], '┼', '┤')}";
-                }
+                    stringToReturn = $"{stringToReturn}{$"| {index++,5} | {task.GuidId,36} | {task.CreateAT.ToString(),19} | {task.TaskName}"}\r\n";
             }
             return stringToReturn ;
         }

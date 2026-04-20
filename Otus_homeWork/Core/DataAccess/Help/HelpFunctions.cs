@@ -1,8 +1,9 @@
 ﻿using Otus.ToDoList.ConsoleBot;
-using Otus_homeWork.Function;
-using Otus_homeWork.UpdHan;
+using Otus_homeWork.Core.Exceptions;
+using Otus_homeWork.TelegramBot;
 
-namespace Otus_homeWork.Help
+
+namespace Otus_homeWork.Core.DataAccess.Help
 {
     internal static class HelpFunctions
     {
@@ -106,10 +107,10 @@ namespace Otus_homeWork.Help
             int returnInt;
             ValidateString(str);
             if (!int.TryParse(str, out returnInt))
-                throw new ArgumentException($"Ошибка ввода параметра (Не число).");
+                throw new CustomException($"Ошибка ввода параметра (Не число).");
             
             if (returnInt < min || returnInt > max)
-                throw new ArgumentException($"Ошибка ввода параметра (Меньше {min} или больше {max}).");
+                throw new CustomException($"Ошибка ввода параметра (Меньше {min} или больше {max}).");
             
             
             return returnInt;
@@ -117,7 +118,7 @@ namespace Otus_homeWork.Help
 
         static internal void ValidateString(string? str) { 
             if (string.IsNullOrWhiteSpace(str))
-                throw new ArgumentException("Строка пустая или состоит из пробелов");
+                throw new CustomException("Строка пустая или состоит из пробелов");
         }
     }
 

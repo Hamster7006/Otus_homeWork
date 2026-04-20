@@ -1,23 +1,14 @@
 ﻿using Otus.ToDoList.ConsoleBot;
 using Otus.ToDoList.ConsoleBot.Types;
-using Otus_homeWork.CustomExept;
-using Otus_homeWork.Function;
-using Otus_homeWork.Help;
-using Otus_homeWork.ToDO;
-using Otus_homeWork.UpdHan;
-using Otus_homeWork.UsServ;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Otus_homeWork.Core.DataAccess.Help;
+using Otus_homeWork.Core.Entities;
+using Otus_homeWork.Core.Exceptions;
+using Otus_homeWork.Core.Services;
+using Otus_homeWork.TelegramBot;
 
 
-var handler = new UpdateHandler();
-var botClient2 = new ConsoleBotClient();
-botClient2.StartReceiving(handler);
 
-namespace Otus_homeWork.UpdHan
+namespace Otus_homeWork.TelegramBot
 {
     public class UpdateHandler : IUpdateHandler
     {
@@ -26,9 +17,9 @@ namespace Otus_homeWork.UpdHan
         public static int MaxLengthList = 0;
         public static int TaskLengthLimittaskLength = 0;
         public static List<ToDoItem> TaskList = new List<ToDoItem>(100);
-        public ToDoService toDoService = new ToDoService ();
+        public ToDoService toDoService = new ToDoService();
 
-        
+
 
 
         public void HandleUpdateAsync(ITelegramBotClient botClient, Update update)
@@ -40,7 +31,7 @@ namespace Otus_homeWork.UpdHan
             {
                 try
                 {
-                    
+
 
                     botClient.SendMessage(update.Message.Chat, $"{HelpFunctions.CheckName("Добро пожаловать в прогрaмму!")} \r\n Доступные комманды:\r\n {HelpFunctions.PrintAvaliableCommandsOrHelp(0)}");
                     botClient.SendMessage(update.Message.Chat, "------------------------------------------------");
@@ -65,7 +56,7 @@ namespace Otus_homeWork.UpdHan
                             botClient.SendMessage(update.Message.Chat, $"{AddFunctionsHW2.RemoveTaskList(s.Replace("/removetask ", ""))}");
                             break;
                         case string s when s.StartsWith("/addtask "):
-                            botClient.SendMessage(update.Message.Chat, $"{toDoService.Add(UserData ,s.Replace("/addtask ", ""))}");
+                            botClient.SendMessage(update.Message.Chat, $"{toDoService.Add(UserData, s.Replace("/addtask ", ""))}");
                             break;
                         case "/showtasks":
                             botClient.SendMessage(update.Message.Chat, $"{toDoService.PrintList(UserData.UserId, false)}");

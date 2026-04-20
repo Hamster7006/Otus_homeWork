@@ -1,12 +1,10 @@
 ﻿
 using Otus.ToDoList.ConsoleBot;
 using Otus.ToDoList.ConsoleBot.Types;
-using Otus_homeWork.Help;
-using Otus_homeWork.ToDO;
-using Otus_homeWork.UpdHan;
-using Otus_homeWork.UsServ;
+using Otus_homeWork.Core.DataAccess.Help;
+using Otus_homeWork.TelegramBot;
 
-namespace Otus_homeWork.Function
+namespace Otus_homeWork.Core.Services
 {
     internal class BaseMenuFunctionHW1
     {
