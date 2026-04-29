@@ -11,8 +11,4 @@
     <ProjectReference Include="..\..\..\C-Sharp-Basic\Homeworks\05.2 ООП интерфейсы\Otus.ToDoList.ConsoleBot\Otus.ToDoList.ConsoleBot.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\DataAccess\" />
-  </ItemGroup>
-
 </Project>

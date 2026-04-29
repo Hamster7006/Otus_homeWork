@@ -19,9 +19,6 @@ namespace Otus_homeWork.TelegramBot
         public static List<ToDoItem> TaskList = new List<ToDoItem>(100);
         public ToDoService toDoService = new ToDoService();
 
-
-
-
         public void HandleUpdateAsync(ITelegramBotClient botClient, Update update)
         {
             botClient.SendMessage(update.Message.Chat, $"Получил '{update.Message.Text}'");
@@ -41,19 +38,19 @@ namespace Otus_homeWork.TelegramBot
                     switch (inputData)
                     {
                         case "/start":
-                            BaseMenuFunctionHW1.Start(new UserService(), update, botClient);
+                            BaseFunction.Start(new UserService(), update, botClient);
                             break;
                         case "/help":
                             botClient.SendMessage(update.Message.Chat, $"{HelpFunctions.PrintAvaliableCommandsOrHelp(1)}");
                             break;
                         case "/info":
-                            BaseMenuFunctionHW1.Info(update.Message.Chat, botClient);
+                            BaseFunction.Info(update.Message.Chat, botClient);
                             break;
                         case "/exit":
                             exitCheck = true;
                             break;
                         case string s when s.StartsWith("/removetask "):
-                            botClient.SendMessage(update.Message.Chat, $"{AddFunctionsHW2.RemoveTaskList(s.Replace("/removetask ", ""))}");
+                            botClient.SendMessage(update.Message.Chat, $"{BaseFunction.RemoveTaskList(s.Replace("/removetask ", ""))}");
                             break;
                         case string s when s.StartsWith("/addtask "):
                             botClient.SendMessage(update.Message.Chat, $"{toDoService.Add(UserData, s.Replace("/addtask ", ""))}");
@@ -62,10 +59,10 @@ namespace Otus_homeWork.TelegramBot
                             botClient.SendMessage(update.Message.Chat, $"{toDoService.PrintList(UserData.UserId, false)}");
                             break;
                         case string s when s.StartsWith("/completetask "):
-                            AddFunctionsHW3.Completetask(update.Message.Chat, botClient, UserData.UserId, toDoService, s.Replace("/completetask ", ""));
+                            BaseFunction.Completetask(update.Message.Chat, botClient, UserData.UserId, toDoService, s.Replace("/completetask ", ""));
                             break;
                         case "/completetask":
-                            AddFunctionsHW3.Completetask(update.Message.Chat, botClient, UserData.UserId, toDoService);
+                            BaseFunction.Completetask(update.Message.Chat, botClient, UserData.UserId, toDoService);
                             break;
                         case "/showalltasks":
                             botClient.SendMessage(update.Message.Chat, $"{toDoService.PrintList(UserData.UserId, true)}");

@@ -6,7 +6,7 @@ using Otus_homeWork.TelegramBot;
 
 namespace Otus_homeWork.Core.Services
 {
-    internal class BaseMenuFunctionHW1
+    internal partial class BaseFunction
     {
         public static void Start(UserService user, Update update, ITelegramBotClient telegramBot)
         {

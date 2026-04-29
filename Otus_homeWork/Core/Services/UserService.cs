@@ -1,4 +1,5 @@
 ﻿using Otus.ToDoList.ConsoleBot.Types;
+using Otus_homeWork.Core.DataAccess;
 using Otus_homeWork.Core.Entities;
 using Otus_homeWork.TelegramBot;
 using System;
@@ -11,6 +12,11 @@ namespace Otus_homeWork.Core.Services
 {
     public class UserService : IUserService
     {
+        public UserService() {
+
+            //Добавить использование IUserRepository в UserService.Получать IUserRepository нужно через конструктор
+        }
+
         public ToDoUser RegisterUser(long telegramUserId, string telegramUserName)
         {
             var user = new ToDoUser(telegramUserName, telegramUserId);

@@ -5,7 +5,7 @@ using Otus_homeWork.TelegramBot;
 
 namespace Otus_homeWork.Core.Services
 {
-    internal class AddFunctionsHW3
+    internal partial class BaseFunction
     {
         public static void Completetask(Chat chat, ITelegramBotClient telegramBotClient, Guid Userid, ToDoService toDoService, string? parm = null)
         {

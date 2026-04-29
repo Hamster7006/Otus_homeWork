@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Otus_homeWork.Core.Services
 {
-    internal class AddFunctionsHW2
+    internal partial class BaseFunction
     {
         
         internal static string RemoveTaskList(string? inputParam = null)
